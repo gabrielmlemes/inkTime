@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d0d0d;
+  --foreground: #ffffff;
+
+  --primary: #e63946;
+  --primary-foreground: #ffffff;
+
+  --secondary: #06d6a0;
+  --secondary-foreground: #0d0d0d;
+
+  --accent: #ffb703;
+  --accent-foreground: #0d0d0d;
+
+  --muted: #2c2c2c;
+  --muted-foreground: #cccccc;
+
+  --border: #3a3a3a;
+  --input: #3a3a3a;
+  --ring: #ffb703;
 }
 
 @theme inline {
@@ -23,4 +39,97 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===============================
+   Tailwind Utilities - Design System
+   =============================== */
+
+/* Text colors */
+.text-primary {
+  @apply text-[var(--primary)];
+}
+.text-primary-foreground {
+  @apply text-[var(--primary-foreground)];
+}
+
+.text-secondary {
+  @apply text-[var(--secondary)];
+}
+.text-secondary-foreground {
+  @apply text-[var(--secondary-foreground)];
+}
+
+.text-accent {
+  @apply text-[var(--accent)];
+}
+.text-accent-foreground {
+  @apply text-[var(--accent-foreground)];
+}
+
+.text-muted {
+  @apply text-[var(--muted)];
+}
+.text-muted-foreground {
+  @apply text-[var(--muted-foreground)];
+}
+
+.text-background {
+  @apply text-[var(--background)];
+}
+.text-foreground {
+  @apply text-[var(--foreground)];
+}
+
+/* Background colors */
+.bg-primary {
+  @apply bg-[var(--primary)];
+}
+.bg-primary-foreground {
+  @apply bg-[var(--primary-foreground)];
+}
+
+.bg-secondary {
+  @apply bg-[var(--secondary)];
+}
+.bg-secondary-foreground {
+  @apply bg-[var(--secondary-foreground)];
+}
+
+.bg-accent {
+  @apply bg-[var(--accent)];
+}
+.bg-accent-foreground {
+  @apply bg-[var(--accent-foreground)];
+}
+
+.bg-muted {
+  @apply bg-[var(--muted)];
+}
+.bg-muted-foreground {
+  @apply bg-[var(--muted-foreground)];
+}
+
+.bg-background {
+  @apply bg-[var(--background)];
+}
+.bg-foreground {
+  @apply bg-[var(--foreground)];
+}
+
+/* Border colors */
+.border-primary {
+  @apply border-[var(--primary)];
+}
+.border-secondary {
+  @apply border-[var(--secondary)];
+}
+.border-accent {
+  @apply border-[var(--accent)];
+}
+.border-muted {
+  @apply border-[var(--muted)];
+}
+.border-foreground {
+  @apply border-[var(--foreground)];
 }
