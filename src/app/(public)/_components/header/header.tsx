@@ -1,9 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { SheetButton } from './sheet-button';
+import NavLinks from '@/components/nav-links';
+import { navItems } from '@/constants/navItems';
+
+import { SheetButton } from './mobile-header';
+import { UserInfo } from './user-info';
 
 const Header = () => {
+  const session = null; // adicionar lógica da sessão aqui
+
   return (
     <header className="fixed top-0 w-full z-20 p-6">
       <div className="container mx-auto flex items-center justify-between">
@@ -14,11 +20,13 @@ const Header = () => {
           </div>
         </Link>
 
-        <nav className="hidden md:flex">
-          <Link href="#">Profissionais</Link>
-        </nav>
+        <div className="flex items-center space-x-8">
+          <NavLinks className="hidden md:flex space-x-3" items={navItems} />
+          <UserInfo session={session} className="hidden md:flex" />
+        </div>
 
-        <SheetButton />
+        {/* Mobile */}
+        <SheetButton session={session} />
       </div>
     </header>
   );
