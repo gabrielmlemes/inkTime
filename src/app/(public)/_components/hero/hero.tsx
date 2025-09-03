@@ -35,7 +35,7 @@ const Hero = () => {
           </article>
 
           <div className="w-2/4 max-w-xs pb-2 md:max-w-sm md:pb-0 flex-1">
-            <Image src={TattooArtist} alt="Imagem de um tatuador" />
+            <Image src={TattooArtist} alt="Imagem de um tatuador" quality={100} priority />
           </div>
         </main>
       </div>
