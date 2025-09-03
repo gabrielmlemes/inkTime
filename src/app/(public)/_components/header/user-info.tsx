@@ -20,13 +20,18 @@ export function UserInfo({ session, ...props }: UserInfoProps) {
           <Link href="/dashboard">{session?.user?.name || 'User'}</Link>
         </div>
       ) : (
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 transition-transform duration-300 ease-in-out hover:scale-105">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
 
-          <Link href="#">Acessar studio</Link>
+          <Link
+            href="#"
+            className="transition-transform duration-300 ease-in-out hover:scale-106 cursor-pointer"
+          >
+            Acessar studio
+          </Link>
         </div>
       )}
     </div>
