@@ -1,4 +1,4 @@
-import MobileSidebar from './_components/mobile-sidebar';
+import Sidebar from './_components/sidebar';
 
 const DashboardLayout = ({
   children,
@@ -7,7 +7,7 @@ const DashboardLayout = ({
 }>) => {
   return (
     <>
-      <MobileSidebar>{children}</MobileSidebar>
+      <Sidebar>{children}</Sidebar>
     </>
   );
 };
