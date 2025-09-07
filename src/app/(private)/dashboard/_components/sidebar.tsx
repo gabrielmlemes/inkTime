@@ -16,6 +16,7 @@ import { useState } from 'react';
 import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
+import { Divider } from '@/components/ui/divider';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import SidebarLink from './sidebar-links';
@@ -42,12 +43,54 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <Button
           size="icon"
           variant="default"
-          className="mt-6 ml-auto cursor-pointer flex items-center justify-center"
+          className={clsx('mt-6 cursor-pointer flex items-center justify-center ml-auto', {
+            'ml-0 mx-auto': isCollapsed,
+          })}
           onClick={() => setisCollapsed(!isCollapsed)}
         >
           {isCollapsed ? <ChevronRight className="size-6" /> : <ChevronLeft className="size-6" />}
         </Button>
 
+        {/* Sidebar fechada */}
+        {isCollapsed && (
+          <nav className="mt-6 flex flex-col gap-4">
+            <SidebarLink
+              href="/dashboard"
+              label="Agendamentos"
+              icon={<CalendarCheck2 className="w-6 h-6" />}
+              pathname={pathname}
+              isCollapsed={isCollapsed}
+            />
+
+            <SidebarLink
+              href="/dashboard/services"
+              label="Serviços"
+              icon={<Folder className="w-6 h-6" />}
+              pathname={pathname}
+              isCollapsed={isCollapsed}
+            />
+
+            <Divider />
+
+            <SidebarLink
+              href="/dashboard/profile"
+              label="Meu perfil"
+              icon={<Settings className="w-6 h-6" />}
+              pathname={pathname}
+              isCollapsed={isCollapsed}
+            />
+
+            <SidebarLink
+              href="/dashboard/plans"
+              label="Planos"
+              icon={<Banknote className="w-6 h-6" />}
+              pathname={pathname}
+              isCollapsed={isCollapsed}
+            />
+          </nav>
+        )}
+
+        {/* Sidebar aberta */}
         <Collapsible open={!isCollapsed} className="mt-6">
           <CollapsibleContent>
             <nav className="flex flex-col gap-4 text-sm">
