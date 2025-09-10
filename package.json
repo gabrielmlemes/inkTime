@@ -17,6 +17,7 @@
     ]
   },
   "dependencies": {
+    "@prisma/client": "^6.16.0",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -44,6 +45,7 @@
     "husky": "^8.0.0",
     "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
+    "prisma": "^6.16.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
