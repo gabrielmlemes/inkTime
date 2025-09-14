@@ -5,20 +5,10 @@ import { useState } from 'react';
 
 import NavLinks from '@/components/nav-links';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { navItems } from '@/constants/navItems';
 
-import { UserInfo } from './user-info';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function SheetButton({ session }: { session: any }) {
+export function MobileHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -41,12 +31,6 @@ export function SheetButton({ session }: { session: any }) {
         <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
           <NavLinks items={navItems} className="flex flex-col space-y-2" />
         </Button>
-
-        <SheetFooter>
-          <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
-            <UserInfo session={session} />
-          </Button>
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
