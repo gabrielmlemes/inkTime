@@ -1,5 +1,14 @@
+'use client';
+
+import { handleLogin } from '@/app/(private)/_actions/login';
+import { Button } from '@/components/ui/button';
+
 const LoginPage = () => {
-  const session = null; // adicionar lógica da sessão aqui
+  // const session = null; // adicionar lógica da sessão aqui
+
+  async function handleSignIn() {
+    await handleLogin('github');
+  }
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-gray-100">
@@ -28,12 +37,12 @@ const LoginPage = () => {
               className="mt-1 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
             />
           </div>
-          <button
-            type="submit"
+          <Button
+            onClick={handleSignIn}
             className="mt-4 w-full rounded-md bg-indigo-600 py-3 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Entrar
-          </button>
+          </Button>
         </form>
       </div>
     </div>
