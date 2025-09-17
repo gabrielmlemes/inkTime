@@ -26,6 +26,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   const [isCollapsed, setisCollapsed] = useState(false); // jogar pro zustand
+  console.log(isCollapsed);
 
   return (
     <section className="flex min-h-screen w-full">
@@ -143,13 +144,12 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       </aside>
 
       {/* Mobile Sidebar */}
-      <div
-        className={clsx('flex flex-1 flex-col transition-all duration-300', {
-          // 'md:ml-20': isCollapsed,
-          // 'md:ml-64': !isCollapsed,
-        })}
-      >
-        <MobileDashboardSidebar pathname={pathname} isCollapsed={isCollapsed} />
+      <div className="flex flex-1 flex-col transition-all duration-300">
+        <MobileDashboardSidebar
+          pathname={pathname}
+          isCollapsed={isCollapsed}
+          setIsCollapsed={setisCollapsed}
+        />
 
         <main className="flex-1 py-4 px-4 md:px-6">{children}</main>
       </div>

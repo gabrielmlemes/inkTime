@@ -8,18 +8,25 @@ import SidebarLink from './sidebar-links';
 interface MobileDashboardSidebarProps {
   pathname: string;
   isCollapsed: boolean;
+  setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function MobileDashboardSidebar({
   pathname,
   isCollapsed,
+  setIsCollapsed,
 }: MobileDashboardSidebarProps) {
   return (
     <header className="md:hidden flex items-center justify-between border-b border-gray-800 px-4 md:px-6 h-14 z-10 sticky top-0 backdrop-blur-sm bg-background/75">
       <Sheet>
         <div className="flex items-center gap-4">
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="md:hidden cursor-pointer">
+            <Button
+              variant="outline"
+              size="icon"
+              className="md:hidden cursor-pointer"
+              onClick={() => setIsCollapsed(false)}
+            >
               <List className="size-6" />
             </Button>
           </SheetTrigger>
