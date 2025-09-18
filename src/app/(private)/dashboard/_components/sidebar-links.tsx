@@ -21,7 +21,7 @@ const SidebarLink = ({ href, label, icon, pathname, isCollapsed }: SidebarLinkPr
           }
         )}
       >
-        <span className="w-6 h-6">{icon}</span>
+        <span className="w-6 h-6 text-primary">{icon}</span>
         {!isCollapsed && <span>{label}</span>}
       </div>
     </Link>

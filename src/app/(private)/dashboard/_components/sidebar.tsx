@@ -149,6 +149,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
           pathname={pathname}
           isCollapsed={isCollapsed}
           setIsCollapsed={setisCollapsed}
+          session={session}
         />
 
         <main className="flex-1 py-4 px-4 md:px-6">{children}</main>

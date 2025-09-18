@@ -1,23 +1,28 @@
 import { Banknote, CalendarCheck2, Folder, List, Settings } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Divider } from '@/components/ui/divider';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import SidebarLink from './sidebar-links';
+import { UserInfo } from './user-info';
 
 interface MobileDashboardSidebarProps {
   pathname: string;
   isCollapsed: boolean;
   setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  session: any;
 }
 
 export default function MobileDashboardSidebar({
   pathname,
   isCollapsed,
   setIsCollapsed,
+  session,
 }: MobileDashboardSidebarProps) {
   return (
-    <header className="md:hidden flex items-center justify-between border-b border-gray-800 px-4 md:px-6 h-14 z-10 sticky top-0 backdrop-blur-sm bg-background/75">
+    <div className="md:hidden flex items-center justify-between border-b border-gray-800 px-4 md:px-6 h-14 z-10 sticky top-0 backdrop-blur-sm bg-background/75">
       <Sheet>
         <div className="flex items-center gap-4">
           <SheetTrigger asChild>
@@ -76,8 +81,13 @@ export default function MobileDashboardSidebar({
               isCollapsed={isCollapsed}
             />
           </nav>
+
+          <div className="mt-auto flex flex-col gap-4 items-center mb-3">
+            <Divider />
+            <UserInfo session={session} />
+          </div>
         </SheetContent>
       </Sheet>
-    </header>
+    </div>
   );
 }

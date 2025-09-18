@@ -6,7 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface UserInfoProps extends React.ComponentProps<'div'> {
   session: any;
-  status: any;
+  status?: any;
 }
 
 export function UserInfo({ session, status, ...props }: UserInfoProps) {
