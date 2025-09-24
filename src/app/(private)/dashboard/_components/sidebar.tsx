@@ -26,7 +26,6 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   const [isCollapsed, setisCollapsed] = useState(false); // jogar pro zustand
-  console.log(isCollapsed);
 
   return (
     <section className="flex min-h-screen w-full">
