@@ -1,4 +1,4 @@
-import Card from '@/components/card.';
+import Card from '@/app/(public)/_components/hero/card';
 import { tattooArtists } from '@/constants/tattoo-artists';
 
 const Professionals = () => {

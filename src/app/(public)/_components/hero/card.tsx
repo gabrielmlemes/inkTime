@@ -2,7 +2,7 @@ import { ArrowRight, Circle } from 'lucide-react';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
-import { Button } from './ui/button';
+import { Button } from '../../../../components/ui/button';
 
 interface CardProps {
   artist: {
