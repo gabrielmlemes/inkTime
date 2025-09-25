@@ -2,7 +2,7 @@
 
 import { z } from 'zod';
 
-import { PHONE_REGEX } from '@/utils/schema-regex';
+import { PHONE_REGEX } from '@/utils/regex';
 
 export const profileSchema = z.object({
   name: z.string().min(3, 'O nome é obrigatório'),
