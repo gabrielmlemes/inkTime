@@ -2,14 +2,11 @@
 
 import { z } from 'zod';
 
-import { PHONE_REGEX } from '@/utils/regex';
-
 export const profileSchema = z.object({
-  name: z.string().min(3, 'O nome é obrigatório'),
-  address: z.string().optional(),
-  phone: z.string().regex(PHONE_REGEX, 'Insira um número de telefone válido'),
+  name: z.string().min(1, 'O nome é obrigatório'),
+  phone: z.string().min(1, 'O telefone é obrigatório'),
   status: z.boolean(),
-  times: z.array(z.string()),
+  address: z.string().optional(),
   timezone: z.string().optional(),
 });
 
