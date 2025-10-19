@@ -1,3 +1,5 @@
+import { Toaster } from '@/components/ui/toaster';
+
 import Sidebar from './_components/sidebar';
 
 const DashboardLayout = ({
@@ -8,6 +10,7 @@ const DashboardLayout = ({
   return (
     <>
       <Sidebar>{children}</Sidebar>
+      <Toaster />
     </>
   );
 };
