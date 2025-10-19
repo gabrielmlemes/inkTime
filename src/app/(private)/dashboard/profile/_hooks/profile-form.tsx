@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { ProfileFormData, profileSchema } from '../schemas/profile-schema';
+import { ProfileFormData, profileSchema } from '../_schemas/profile-schema';
 
 interface UserProfileFormProps {
   name: string | null;
