@@ -1,5 +1,15 @@
-const Service = () => {
-  return <div>Service Page</div>;
-};
+import { redirect } from 'next/navigation';
 
-export default Service;
+import auth from '@/lib/get-server-session';
+
+import { ServiceContent } from './_components/service-content';
+
+export default async function Service() {
+  const session = await auth();
+
+  if (!session) {
+    redirect('/login');
+  }
+
+  return <ServiceContent userId={session?.user?.id} />;
+}
