@@ -61,7 +61,7 @@ model Services {
   description String?
   isActive    Boolean @default(true)
 
-  userId String @unique // Each user (client) can have only one set of services
+  userId String // Each user (client) can have only one set of services
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   appointments Appointment[] // Each service can have multiple appointments
