@@ -19,15 +19,6 @@ import { convertRealtoCents } from '@/helpers/convertCurrency';
 import { createService } from '../_actions/create-service';
 import { ServiceFormData, serviceFormSchema } from '../_schemas/services-schema';
 
-// interface DialogServiceFormProps {
-//   initialValues?: {
-//     name: string;
-//     price: string;
-//     hours: string;
-//     minutes: string;
-//   };
-// }
-
 interface DialogServiceFormProps {
   closeModal: () => void;
 }
