@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -31,6 +32,7 @@ const defaultValues: ServiceFormData = {
 };
 
 export function DialogServiceForm({ closeModal }: DialogServiceFormProps) {
+  const router = useRouter();
   const form = useForm<ServiceFormData>({
     resolver: zodResolver(serviceFormSchema),
     defaultValues,
@@ -59,6 +61,7 @@ export function DialogServiceForm({ closeModal }: DialogServiceFormProps) {
     toast.success('Serviço criado com sucesso!');
     form.reset();
     closeModal();
+    router.refresh();
   }
 
   function changeCurrencyFormat(event: React.ChangeEvent<HTMLInputElement>) {

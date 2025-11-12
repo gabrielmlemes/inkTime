@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 
 import { auth } from '@/lib/auth';
@@ -32,6 +33,8 @@ export async function createService(data: CreateServiceFormData) {
         userId: session.user.id,
       },
     });
+
+    revalidatePath('/dashboard/services');
 
     return {
       data: newService,
