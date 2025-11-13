@@ -7,7 +7,6 @@ interface ServiceContentProps {
 
 export async function ServiceContent({ userId }: ServiceContentProps) {
   const services = await getServices({ userId });
-  console.log(services);
 
-  return <ServicesList />;
+  return <ServicesList services={services || []} />;
 }

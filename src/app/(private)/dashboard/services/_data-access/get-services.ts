@@ -11,6 +11,7 @@ export async function getServices({ userId }: { userId: string }) {
     const services = await prisma.services.findMany({
       where: {
         userId,
+        isActive: true,
       },
     });
 
