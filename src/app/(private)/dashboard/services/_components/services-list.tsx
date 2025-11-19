@@ -27,6 +27,7 @@ interface ServicesListProps {
 export function ServicesList({ services }: ServicesListProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [editingService, setEditingService] = useState<Services | null>(null);
 
   async function handleDeleteService({ serviceId }: { serviceId: string }) {
     try {
@@ -44,6 +45,11 @@ export function ServicesList({ services }: ServicesListProps) {
     }
   }
 
+  function handleEditService(service: Services) {
+    setEditingService(service);
+    setOpen(true);
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <section className="mx-auto">
@@ -57,13 +63,35 @@ export function ServicesList({ services }: ServicesListProps) {
               </Button>
             </DialogTrigger>
 
-            <DialogContent>
+            <DialogContent
+              onInteractOutside={(e) => {
+                e.preventDefault();
+                setOpen(false);
+                setEditingService(null);
+              }}
+            >
               <DialogHeader>
                 <DialogTitle>Novo serviço</DialogTitle>
                 <DialogDescription>Adicione um novo serviço.</DialogDescription>
               </DialogHeader>
 
-              <DialogServiceForm closeModal={() => setOpen(false)} />
+              <DialogServiceForm
+                closeModal={() => {
+                  setOpen(false);
+                  setEditingService(null);
+                }}
+                serviceId={editingService ? editingService.id : undefined}
+                initialValues={
+                  editingService
+                    ? {
+                        name: editingService.name,
+                        price: (editingService.price / 100).toFixed(2).replace('.', ','),
+                        hours: Math.floor(editingService.duration / 60).toString(),
+                        minutes: (editingService.duration % 60).toString(),
+                      }
+                    : undefined
+                }
+              />
             </DialogContent>
           </CardHeader>
 
@@ -82,10 +110,26 @@ export function ServicesList({ services }: ServicesListProps) {
                         <h3 className="font-semibold text-lg">{service.name}</h3>
                         <span className="text-gray-500">–</span>
                         <span className="text-lg">{formatCurrency(service.price)}</span>
+
+                        <span className="text-lg">
+                          {service.duration ? (
+                            <div className="flex items-center gap-2">
+                              <span className="text-gray-500">–</span>
+                              <div>
+                                <span className="text-lg">
+                                  {Math.floor(service.duration / 60)}h
+                                </span>
+                                <span className="text-lg"> {service.duration % 60}min</span>
+                              </div>
+                            </div>
+                          ) : (
+                            ''
+                          )}
+                        </span>
                       </div>
 
                       <div className="flex gap-2">
-                        <Button variant="outline">
+                        <Button variant="outline" onClick={() => handleEditService(service)}>
                           Editar
                           <PencilIcon className="size-4" />
                         </Button>

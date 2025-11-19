@@ -18,24 +18,29 @@ import { Input } from '@/components/ui/input';
 import { convertRealtoCents } from '@/helpers/convertCurrency';
 
 import { createService } from '../_actions/create-service';
+import { updateServiceById } from '../_actions/update-service';
 import { ServiceFormData, serviceFormSchema } from '../_schemas/services-schema';
 
 interface DialogServiceFormProps {
   closeModal: () => void;
+  serviceId?: string;
+  initialValues?: ServiceFormData;
 }
 
-const defaultValues: ServiceFormData = {
-  name: '',
-  price: '',
-  hours: '',
-  minutes: '',
-};
-
-export function DialogServiceForm({ closeModal }: DialogServiceFormProps) {
+export function DialogServiceForm({
+  closeModal,
+  serviceId,
+  initialValues,
+}: DialogServiceFormProps) {
   const router = useRouter();
   const form = useForm<ServiceFormData>({
     resolver: zodResolver(serviceFormSchema),
-    defaultValues,
+    defaultValues: initialValues || {
+      name: '',
+      price: '',
+      hours: '',
+      minutes: '',
+    },
   });
 
   const isSubmitting = form.formState.isSubmitting;
@@ -45,6 +50,17 @@ export function DialogServiceForm({ closeModal }: DialogServiceFormProps) {
     const hours = parseInt(data.hours ?? '') || 0;
     const minutes = parseInt(data.minutes ?? '') || 0;
     const durationInMinutes = hours * 60 + minutes;
+
+    if (serviceId) {
+      await editServiceById({
+        serviceId,
+        name: data.name,
+        priceInCents,
+        duration: durationInMinutes,
+      });
+
+      return;
+    }
 
     const response = await createService({
       name: data.name,
@@ -62,6 +78,36 @@ export function DialogServiceForm({ closeModal }: DialogServiceFormProps) {
     form.reset();
     closeModal();
     router.refresh();
+  }
+
+  async function editServiceById({
+    serviceId,
+    name,
+    priceInCents,
+    duration,
+  }: {
+    serviceId: string;
+    name: string;
+    priceInCents: number;
+    duration: number;
+  }) {
+    const response = await updateServiceById({
+      serviceId,
+      name,
+      priceInCents,
+      duration,
+    });
+
+    if (response.error) {
+      toast.error(response.error);
+      closeModal();
+      return;
+    }
+
+    toast.success('Serviço atualizado com sucesso!');
+    closeModal();
+    router.refresh();
+    return;
   }
 
   function changeCurrencyFormat(event: React.ChangeEvent<HTMLInputElement>) {
@@ -153,7 +199,7 @@ export function DialogServiceForm({ closeModal }: DialogServiceFormProps) {
         </div>
 
         <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? 'Salvando...' : 'Salvar serviço'}
+          {isSubmitting ? 'Salvando...' : `${serviceId ? 'Salvar alterações' : 'Criar serviço'}`}
         </Button>
       </form>
     </Form>
