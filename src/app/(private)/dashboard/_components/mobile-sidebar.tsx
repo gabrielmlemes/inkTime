@@ -1,4 +1,6 @@
 import { Banknote, CalendarCheck2, Folder, List, Settings } from 'lucide-react';
+import router from 'next/router';
+import { signOut, useSession } from 'next-auth/react';
 
 import { Button } from '@/components/ui/button';
 import { Divider } from '@/components/ui/divider';
@@ -21,6 +23,14 @@ export default function MobileDashboardSidebar({
   setIsCollapsed,
   session,
 }: MobileDashboardSidebarProps) {
+  const { update } = useSession();
+
+  async function handleSignOut() {
+    await signOut();
+    await update();
+    router.replace('/login');
+  }
+
   return (
     <div className="md:hidden flex items-center justify-between border-b border-gray-800 px-4 md:px-6 h-14 z-10 sticky top-0 backdrop-blur-sm bg-background/75">
       <Sheet>
@@ -85,6 +95,9 @@ export default function MobileDashboardSidebar({
           <div className="mt-auto flex flex-col gap-4 items-center mb-3">
             <Divider />
             <UserInfo session={session} />
+            <Button onClick={handleSignOut} className="w-full">
+              Sair
+            </Button>
           </div>
         </SheetContent>
       </Sheet>

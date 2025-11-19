@@ -9,8 +9,8 @@ import {
   Folder,
   Settings,
 } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { usePathname, useRouter } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 import Logo from '@/components/logo';
@@ -23,9 +23,16 @@ import SidebarLink from './sidebar-links';
 import { UserInfo } from './user-info';
 
 const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
+  const router = useRouter();
   const pathname = usePathname();
   const [isCollapsed, setisCollapsed] = useState(false); // jogar pro zustand
+
+  async function handleSignOut() {
+    await signOut();
+    await update();
+    router.replace('/login');
+  }
 
   return (
     <section className="flex min-h-screen w-full">
@@ -137,6 +144,9 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             <div className="mt-auto flex flex-col gap-4 items-center">
               <Divider />
               <UserInfo session={session} status={status} />
+              <Button onClick={handleSignOut} className="w-full">
+                Sair
+              </Button>
             </div>
           </CollapsibleContent>
         </Collapsible>
