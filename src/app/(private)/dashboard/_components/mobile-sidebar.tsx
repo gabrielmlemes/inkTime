@@ -1,5 +1,5 @@
 import { Banknote, CalendarCheck2, Folder, List, Settings } from 'lucide-react';
-import router from 'next/router';
+import { redirect } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 
 import { Button } from '@/components/ui/button';
@@ -28,7 +28,7 @@ export default function MobileDashboardSidebar({
   async function handleSignOut() {
     await signOut();
     await update();
-    router.replace('/login');
+    redirect('/login');
   }
 
   return (
