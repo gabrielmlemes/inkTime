@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma';
 
-export async function getInfoSchedule({ userId }: { userId: string }) {
+export async function getStudioInfo({ userId }: { userId: string }) {
   try {
     if (!userId) {
       return null;
