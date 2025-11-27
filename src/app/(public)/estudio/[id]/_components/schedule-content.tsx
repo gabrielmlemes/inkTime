@@ -1,4 +1,4 @@
-import { MapPin, UserCircle } from 'lucide-react';
+import { MapPin, UserCircle, UserIcon } from 'lucide-react';
 import Image from 'next/image';
 
 import { Prisma } from '../../../../../../generated/prisma/client';
@@ -25,7 +25,7 @@ export default function ScheduleContent({ user }: { user: ScheduleContentProps }
               {user.image ? (
                 <Image
                   alt="Imagem do perfil do estúdio"
-                  src={user.image}
+                  src={user.image ?? <UserIcon />}
                   className="object-cover"
                   fill
                 />
@@ -35,9 +35,11 @@ export default function ScheduleContent({ user }: { user: ScheduleContentProps }
             </div>
 
             <h1 className="mt-4 text-3xl font-bold text-center">{user.name}</h1>
-            <div className="mt-2 flex gap-2 items-center">
-              <MapPin size="20" className="text-gray-400" />
-              <p className=" text-gray-400 text-center">{user.address}</p>
+            <div className="mt-2 flex-col items-center justify-center ">
+              <MapPin size="20" className="text-gray-400 text-center w-full mb-1" />
+              <p className=" text-gray-400 text-center">
+                {user.address ?? 'Endereço não informado'}
+              </p>
             </div>
 
             <ScheduleForm />

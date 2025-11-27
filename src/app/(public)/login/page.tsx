@@ -23,7 +23,7 @@ const LoginPage = () => {
               type="email"
               id="email"
               placeholder="seu@email.com"
-              className="mt-1 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 placeholder:text-gray-400 text-gray-700"
             />
           </div>
           <div>
@@ -34,7 +34,7 @@ const LoginPage = () => {
               type="password"
               id="password"
               placeholder="********"
-              className="mt-1 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 placeholder:text-gray-400 text-gray-700"
             />
           </div>
           <Button

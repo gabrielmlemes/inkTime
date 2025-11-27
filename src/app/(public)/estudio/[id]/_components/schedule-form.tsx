@@ -1,9 +1,16 @@
 'use client';
 
+import 'react-datepicker/dist/react-datepicker.css';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { formatPhone } from '@/utils/format-phone';
+
 import { ScheduleFormData, scheduleFormSchema } from '../_schema/schedule-form-schema';
+import { DateTimePicker } from './date-picker';
 
 export function ScheduleForm() {
   const form = useForm<ScheduleFormData>({
@@ -12,10 +19,84 @@ export function ScheduleForm() {
       name: '',
       email: '',
       phone: '',
-      date: '',
+      date: new Date(),
       serviceId: '',
     },
   });
 
-  return <div>Schedule Form Component</div>;
+  return (
+    <section className="my-8 px-4 container">
+      <Form {...form}>
+        <form>
+          <div className="space-y-6 border border-gray-600 shadow-lg shadow-gray-700 p-6 rounded-lg">
+            <FormField
+              name="name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nome Completo</FormLabel>
+                  <FormControl>
+                    <Input id="name" {...field} placeholder="Digite seu nome completo..." />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name="email"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>E-mail</FormLabel>
+                  <FormControl>
+                    <Input id="email" {...field} placeholder="Digite seu e-mail..." />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name="phone"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Telefone (WhatsApp)</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      id="phone"
+                      type="tel"
+                      placeholder="(99) 99999-9999"
+                      onChange={(e) => {
+                        const formattedPhone = formatPhone(e.target.value);
+                        field.onChange(formattedPhone);
+                      }}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name="date"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="flex items-center gap-2">
+                  <FormLabel>Data do agendamento</FormLabel>
+                  <FormControl>
+                    <DateTimePicker
+                      {...field}
+                      initialDate={new Date()}
+                      className="w-full rounded-lg border p-2 cursor-pointer"
+                      onChange={(date) => field.onChange(date)}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+        </form>
+      </Form>
+    </section>
+  );
 }
