@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Prisma } from '../../../../../../generated/prisma/client';
 import { ScheduleForm } from './schedule-form';
 
-type ScheduleContentProps = Prisma.UserGetPayload<{
+export type ScheduleContentProps = Prisma.UserGetPayload<{
   include: {
     subscription: true;
     services: {
@@ -42,7 +42,7 @@ export default function ScheduleContent({ user }: { user: ScheduleContentProps }
               </p>
             </div>
 
-            <ScheduleForm />
+            <ScheduleForm user={user} />
           </article>
         </div>
       </section>

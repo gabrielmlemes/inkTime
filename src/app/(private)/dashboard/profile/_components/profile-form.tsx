@@ -185,20 +185,10 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                             <SelectValue placeholder="Selecione o status" />
                           </SelectTrigger>
 
-                          <SelectContent className="bg-muted">
+                          <SelectContent>
                             <SelectGroup>
-                              <SelectItem
-                                value="active"
-                                className="hover:text-black cursor-pointer"
-                              >
-                                Ativo (Estúdio aberto)
-                              </SelectItem>
-                              <SelectItem
-                                value="inactive"
-                                className="hover:text-black cursor-pointer"
-                              >
-                                Inativo (Estúdio fechado)
-                              </SelectItem>
+                              <SelectItem value="active">Ativo (Estúdio aberto)</SelectItem>
+                              <SelectItem value="inactive">Inativo (Estúdio fechado)</SelectItem>
                             </SelectGroup>
                           </SelectContent>
                         </Select>

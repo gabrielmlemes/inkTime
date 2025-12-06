@@ -7,12 +7,21 @@ import { useForm } from 'react-hook-form';
 
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { formatPhone } from '@/utils/format-phone';
 
 import { ScheduleFormData, scheduleFormSchema } from '../_schema/schedule-form-schema';
 import { DateTimePicker } from './date-picker';
+import type { ScheduleContentProps } from './schedule-content';
 
-export function ScheduleForm() {
+export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
   const form = useForm<ScheduleFormData>({
     resolver: zodResolver(scheduleFormSchema),
     defaultValues: {
@@ -90,6 +99,34 @@ export function ScheduleForm() {
                       className="w-full rounded-lg border p-2 cursor-pointer"
                       onChange={(date) => field.onChange(date)}
                     />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name="serviceId"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="flex flex-col  gap-2">
+                  <FormLabel>Selecione o serviço</FormLabel>
+                  <FormControl>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Selecione o serviço que deseja agendar" />
+                      </SelectTrigger>
+
+                      <SelectContent>
+                        <SelectGroup>
+                          {user.services.map((service) => (
+                            <SelectItem key={service.id} value={service.id}>
+                              {service.name} - ({Math.floor(service.duration / 60)}h{' '}
+                              {service.duration % 60}min) - R$ {service.price / 100}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                 </FormItem>
               )}
