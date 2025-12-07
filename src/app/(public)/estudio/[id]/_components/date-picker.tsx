@@ -1,7 +1,6 @@
 'use client';
 
 import { ptBR } from 'date-fns/locale/pt-BR';
-import { Calendar1Icon } from 'lucide-react';
 import { useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 

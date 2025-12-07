@@ -3,8 +3,10 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import {
@@ -21,7 +23,17 @@ import { ScheduleFormData, scheduleFormSchema } from '../_schema/schedule-form-s
 import { DateTimePicker } from './date-picker';
 import type { ScheduleContentProps } from './schedule-content';
 
+interface TimeSlot {
+  time: string;
+  available: boolean;
+}
+
 export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [availableTimes, setAvailableTimes] = useState<TimeSlot[]>([]);
+  const [loadingTimes, setLoadingTimes] = useState(false);
+  const [blockedTimes, setBlockedTimes] = useState<string[]>([]);
+
   const form = useForm<ScheduleFormData>({
     resolver: zodResolver(scheduleFormSchema),
     defaultValues: {
@@ -33,10 +45,58 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
     },
   });
 
+  const { watch } = form;
+  const selectedDate = watch('date');
+  const selectedService = watch('serviceId');
+
+  async function handleRegisterAppointment(formData: ScheduleFormData) {
+    console.log(formData);
+  }
+
+  const fetchBlockedTimes = useCallback(
+    async (date: Date): Promise<string[]> => {
+      setLoadingTimes(true);
+
+      try {
+        const dateString = date.toISOString().split('T')[0];
+        const response = await fetch(
+          `/api/schedule/get-appointments?userId=${user.id}&date=${dateString}`
+        );
+        const data = await response.json();
+        setLoadingTimes(false);
+
+        return data; // Retorna um array com os horários que já estão bloqueados para o dia selecionado
+      } catch (error) {
+        console.log(error);
+        setLoadingTimes(false);
+        return [];
+      } finally {
+        setLoadingTimes(false);
+      }
+    },
+    [user.id]
+  );
+
+  useEffect(() => {
+    if (selectedDate) {
+      fetchBlockedTimes(selectedDate).then((blocked) => {
+        setBlockedTimes(blocked);
+
+        const times = user.times || [];
+        const updatedAvailableTimes = times.map((time) => ({
+          time: time,
+          available: !blocked.includes(time), // Marca como indisponível se estiver na lista de bloqueados
+        }));
+
+        setAvailableTimes(updatedAvailableTimes);
+      });
+    }
+  }, [fetchBlockedTimes, user.id, selectedDate, selectedTime, user.times]);
+
   return (
     <section className="my-8 px-4 container">
       <Form {...form}>
-        <form>
+        <form onSubmit={form.handleSubmit(handleRegisterAppointment)}>
           <div className="space-y-6 border border-gray-600 shadow-lg shadow-gray-700 p-6 rounded-lg">
             <FormField
               name="name"
@@ -131,6 +191,26 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
                 </FormItem>
               )}
             />
+
+            {user.status === true ? (
+              <Button
+                className="w-full"
+                type="submit"
+                disabled={
+                  !watch('serviceId') ||
+                  !watch('date') ||
+                  !watch('name') ||
+                  !watch('email') ||
+                  !watch('phone')
+                }
+              >
+                Realizar agendamento
+              </Button>
+            ) : (
+              <p className="text-sm text-red-500 text-center">
+                Agendamentos estão temporariamente desativados para este estúdio.
+              </p>
+            )}
           </div>
         </form>
       </Form>
