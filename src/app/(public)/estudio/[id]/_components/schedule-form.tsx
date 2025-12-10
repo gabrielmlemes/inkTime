@@ -3,8 +3,11 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { LoaderCircle } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
@@ -19,16 +22,20 @@ import {
 } from '@/components/ui/select';
 import { formatPhone } from '@/utils/format-phone';
 
+import { createAppointment } from '../_actions/create-appointment';
 import { ScheduleFormData, scheduleFormSchema } from '../_schema/schedule-form-schema';
 import { DateTimePicker } from './date-picker';
 import type { ScheduleContentProps } from './schedule-content';
+import { ScheduleTimesList } from './schedule-times-list';
 
-interface TimeSlot {
+export interface TimeSlot {
   time: string;
   available: boolean;
 }
 
 export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
+  const router = useRouter();
+
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [availableTimes, setAvailableTimes] = useState<TimeSlot[]>([]);
   const [loadingTimes, setLoadingTimes] = useState(false);
@@ -48,9 +55,32 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
   const { watch } = form;
   const selectedDate = watch('date');
   const selectedService = watch('serviceId');
+  const isSubmitting = form.formState.isSubmitting;
 
   async function handleRegisterAppointment(formData: ScheduleFormData) {
-    console.log(formData);
+    if (!selectedTime) {
+      toast.error('Por favor, selecione um horário.');
+      return;
+    }
+
+    const appointment = {
+      ...formData,
+      time: selectedTime,
+      userId: user.id,
+    };
+
+    try {
+      await createAppointment(appointment);
+
+      toast.success('Agendamento realizado com sucesso!');
+      form.reset();
+      setSelectedTime(null);
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+      toast.error('Erro ao realizar agendamento.');
+      return;
+    }
   }
 
   const fetchBlockedTimes = useCallback(
@@ -192,8 +222,39 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
               )}
             />
 
+            {user.status === true && selectedService && (
+              <div className="space-y-2">
+                <FormLabel>Horários disponíveis</FormLabel>
+                <div className="border border-gray-600 shadow-lg shadow-gray-7 p-4 rounded-lg">
+                  {loadingTimes ? (
+                    <LoaderCircle className="animate-spin mx-auto" />
+                  ) : availableTimes.length === 0 ? (
+                    <p>Nenhum horário disponível para este dia.</p>
+                  ) : (
+                    <ScheduleTimesList
+                      onTimeSelect={(time) => setSelectedTime(time)}
+                      studioTimes={user.times}
+                      availableTimes={availableTimes}
+                      blockedTimes={blockedTimes}
+                      selectedTime={selectedTime}
+                      selectedDate={selectedDate}
+                      requiredSlots={
+                        user.services.find((service) => service.id === selectedService)
+                          ? Math.ceil(
+                              user.services.find((service) => service.id === selectedService)!
+                                .duration / 30
+                            )
+                          : 1
+                      }
+                    />
+                  )}
+                </div>
+              </div>
+            )}
+
             {user.status === true ? (
               <Button
+                loading={isSubmitting}
                 className="w-full"
                 type="submit"
                 disabled={
