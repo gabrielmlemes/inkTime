@@ -109,16 +109,25 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
 
   useEffect(() => {
     if (selectedDate) {
-      fetchBlockedTimes(selectedDate).then((blocked) => {
-        setBlockedTimes(blocked);
+      fetchBlockedTimes(selectedDate).then((blockedTimes) => {
+        setBlockedTimes(blockedTimes);
 
         const times = user.times || [];
-        const updatedAvailableTimes = times.map((time) => ({
+
+        const finalAvailableSlots = times.map((time) => ({
           time: time,
-          available: !blocked.includes(time), // Marca como indisponível se estiver na lista de bloqueados
+          available: !blockedTimes.includes(time),
         }));
 
-        setAvailableTimes(updatedAvailableTimes);
+        setAvailableTimes(finalAvailableSlots);
+
+        const stillAvailable = finalAvailableSlots.find(
+          (slot) => slot.time === selectedTime && slot.available
+        );
+
+        if (!stillAvailable) {
+          setSelectedTime('');
+        }
       });
     }
   }, [fetchBlockedTimes, user.id, selectedDate, selectedTime, user.times]);
