@@ -40,6 +40,7 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
   const [availableTimes, setAvailableTimes] = useState<TimeSlot[]>([]);
   const [loadingTimes, setLoadingTimes] = useState(false);
   const [blockedTimes, setBlockedTimes] = useState<string[]>([]);
+  const [datePickerKey, setDatePickerKey] = useState(0);
 
   const form = useForm<ScheduleFormData>({
     resolver: zodResolver(scheduleFormSchema),
@@ -50,12 +51,19 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
       date: new Date(),
       serviceId: '',
     },
+    mode: 'onBlur',
   });
 
   const { watch } = form;
   const selectedDate = watch('date');
   const selectedService = watch('serviceId');
   const isSubmitting = form.formState.isSubmitting;
+
+  function resetAllFields() {
+    form.reset();
+    setSelectedTime(null);
+    setDatePickerKey((prevKey) => prevKey + 1);
+  }
 
   async function handleRegisterAppointment(formData: ScheduleFormData) {
     if (!selectedTime) {
@@ -73,8 +81,8 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
       await createAppointment(appointment);
 
       toast.success('Agendamento realizado com sucesso!');
-      form.reset();
-      setSelectedTime(null);
+      resetAllFields();
+
       router.refresh();
     } catch (error) {
       console.log(error);
@@ -193,10 +201,14 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
                   <FormLabel>Data do agendamento</FormLabel>
                   <FormControl>
                     <DateTimePicker
+                      key={datePickerKey}
                       {...field}
                       initialDate={new Date()}
                       className="w-full rounded-lg border p-2 cursor-pointer"
-                      onChange={(date) => field.onChange(date)}
+                      onChange={(date) => {
+                        field.onChange(date);
+                        setSelectedTime(null);
+                      }}
                     />
                   </FormControl>
                 </FormItem>
@@ -210,9 +222,15 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
                 <FormItem className="flex flex-col  gap-2">
                   <FormLabel>Selecione o serviço</FormLabel>
                   <FormControl>
-                    <Select onValueChange={field.onChange} value={field.value}>
+                    <Select
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        setSelectedTime(null);
+                      }}
+                      value={field.value}
+                    >
                       <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Selecione o serviço que deseja agendar" />
+                        <SelectValue placeholder="Clique para selecionar" />
                       </SelectTrigger>
 
                       <SelectContent>
@@ -237,16 +255,14 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
                 <div className="border border-gray-600 shadow-lg shadow-gray-7 p-4 rounded-lg">
                   {loadingTimes ? (
                     <LoaderCircle className="animate-spin mx-auto" />
-                  ) : availableTimes.length === 0 ? (
-                    <p>Nenhum horário disponível para este dia.</p>
                   ) : (
                     <ScheduleTimesList
-                      onTimeSelect={(time) => setSelectedTime(time)}
                       studioTimes={user.times}
-                      availableTimes={availableTimes}
                       blockedTimes={blockedTimes}
-                      selectedTime={selectedTime}
+                      availableTimes={availableTimes}
                       selectedDate={selectedDate}
+                      selectedTime={selectedTime}
+                      onTimeSelect={(time) => setSelectedTime(time)}
                       requiredSlots={
                         user.services.find((service) => service.id === selectedService)
                           ? Math.ceil(

@@ -44,8 +44,8 @@ export async function GET(request: NextRequest) {
     const blockedSlots = new Set<string>();
 
     for (const appointment of appointments) {
-      const requiredSlots = Math.ceil(appointment.service.duration / 30);
-      const startIndex = user.times.indexOf(appointment.time);
+      const requiredSlots = Math.ceil(appointment.service.duration / 30); // Cada slot tem 30 minutos, por isso divide por 30
+      const startIndex = user.times.indexOf(appointment.time); // Pega o slot inicial
 
       if (startIndex !== -1) {
         for (let i = 0; i < requiredSlots; i++) {
@@ -58,6 +58,7 @@ export async function GET(request: NextRequest) {
     }
 
     const blockedTimes = Array.from(blockedSlots);
+    console.log('blockedTimes:', blockedTimes);
 
     return NextResponse.json(blockedTimes, { status: 200 });
   } catch (error) {
