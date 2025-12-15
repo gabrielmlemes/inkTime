@@ -14,7 +14,7 @@ const SidebarLink = ({ href, label, icon, pathname, isCollapsed }: SidebarLinkPr
     <Link href={href}>
       <div
         className={clsx(
-          'flex items-center gap-2 px-3 py-2 rounded-md text-white transition-colors cursor-pointer',
+          'flex items-center gap-2.5 px-3 py-2 rounded-md text-white transition-colors cursor-pointer',
           {
             'bg-gray-800': pathname === href,
             'bg-white/10 hover:bg-white/20': pathname !== href,

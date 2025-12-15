@@ -1,6 +1,11 @@
+import { Calendar } from 'lucide-react';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+import { Button } from '@/components/ui/button';
 import getServerSession from '@/lib/get-server-session';
+
+import { CopyLinkButton } from './_components/copy-link-button';
 
 const Dashboard = async () => {
   const session = await getServerSession();
@@ -9,7 +14,20 @@ const Dashboard = async () => {
     return redirect('/login');
   }
 
-  return <div>Dashboard Page</div>;
+  return (
+    <main>
+      <div className="flex justify-end gap-4 mt-4">
+        <Link target="_blank" href={`/estudio/${session.user.id!}`}>
+          <Button>
+            <Calendar size="5" />
+            <span>Novo agendamento</span>
+          </Button>
+        </Link>
+
+        <CopyLinkButton userId={session.user.id} />
+      </div>
+    </main>
+  );
 };
 
 export default Dashboard;

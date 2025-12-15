@@ -1,7 +1,13 @@
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import ScheduleContent from './_components/schedule-content';
 import { getStudioInfo } from './_data-access/get-estudio-info';
+
+export const metadata: Metadata = {
+  title: 'Agendamento - InkTime',
+  description: 'Agendamento facilitado para você!',
+};
 
 export default async function SchedulePage({ params }: { params: Promise<{ id: string }> }) {
   const estudioId = (await params).id;

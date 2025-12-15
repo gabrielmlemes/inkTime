@@ -17,6 +17,7 @@ import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
 import { Divider } from '@/components/ui/divider';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import MobileDashboardSidebar from './mobile-sidebar';
 import SidebarLink from './sidebar-links';
@@ -64,39 +65,59 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         {/* Desktop Sidebar closed */}
         {isCollapsed && (
           <nav className="mt-6 flex flex-col gap-4">
-            <SidebarLink
-              href="/dashboard"
-              label="Agendamentos"
-              icon={<CalendarCheck2 className="w-6 h-6" />}
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-            />
+            <Tooltip>
+              <TooltipTrigger>
+                <SidebarLink
+                  href="/dashboard"
+                  label="Agendamentos"
+                  icon={<CalendarCheck2 className="w-6 h-6 text-muted-foreground" />}
+                  pathname={pathname}
+                  isCollapsed={isCollapsed}
+                />
+              </TooltipTrigger>
+              <TooltipContent side="right">Agendamentos</TooltipContent>
+            </Tooltip>
 
-            <SidebarLink
-              href="/dashboard/services"
-              label="Serviços"
-              icon={<Folder className="w-6 h-6" />}
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-            />
+            <Tooltip>
+              <TooltipTrigger>
+                <SidebarLink
+                  href="/dashboard/services"
+                  label="Serviços"
+                  icon={<Folder className="w-6 h-6 text-muted-foreground" />}
+                  pathname={pathname}
+                  isCollapsed={isCollapsed}
+                />
+              </TooltipTrigger>
+              <TooltipContent side="right">Serviços</TooltipContent>
+            </Tooltip>
 
             <Divider />
 
-            <SidebarLink
-              href="/dashboard/profile"
-              label="Meu perfil"
-              icon={<Settings className="w-6 h-6" />}
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-            />
+            <Tooltip>
+              <TooltipTrigger>
+                <SidebarLink
+                  href="/dashboard/profile"
+                  label="Meu perfil"
+                  icon={<Settings className="w-6 h-6 text-muted-foreground" />}
+                  pathname={pathname}
+                  isCollapsed={isCollapsed}
+                />
+              </TooltipTrigger>
+              <TooltipContent side="right">Perfil</TooltipContent>
+            </Tooltip>
 
-            <SidebarLink
-              href="/dashboard/plans"
-              label="Planos"
-              icon={<Banknote className="w-6 h-6" />}
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-            />
+            <Tooltip>
+              <TooltipTrigger>
+                <SidebarLink
+                  href="/dashboard/plans"
+                  label="Planos"
+                  icon={<Banknote className="w-6 h-6 text-muted-foreground" />}
+                  pathname={pathname}
+                  isCollapsed={isCollapsed}
+                />
+              </TooltipTrigger>
+              <TooltipContent side="right">Planos</TooltipContent>
+            </Tooltip>
           </nav>
         )}
 
