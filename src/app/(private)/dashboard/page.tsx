@@ -1,4 +1,4 @@
-import { Calendar } from 'lucide-react';
+import { Calendar, UserRoundCheck } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import getServerSession from '@/lib/get-server-session';
 
 import { CopyLinkButton } from './_components/copy-link-button';
+import { Reminders } from './_components/reminder/reminders';
 
 const Dashboard = async () => {
   const session = await getServerSession();
@@ -26,6 +27,14 @@ const Dashboard = async () => {
 
         <CopyLinkButton userId={session.user.id} />
       </div>
+
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+        <div className="border-red-500 border-2">
+          <UserRoundCheck />
+          AGENDA
+        </div>
+        <Reminders userId={session.user.id} />
+      </section>
     </main>
   );
 };

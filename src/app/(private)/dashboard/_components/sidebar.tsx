@@ -125,7 +125,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <Collapsible open={!isCollapsed} className="mt-6 flex-grow">
           <CollapsibleContent className="flex h-full flex-col">
             <nav className="flex flex-col gap-4 text-sm">
-              <span className="text-muted-foreground text-xs">Painel</span>
+              <span className="text-muted-foreground text-xs">PAINEL</span>
 
               <SidebarLink
                 href="/dashboard"
