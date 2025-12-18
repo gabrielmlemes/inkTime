@@ -33,5 +33,5 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-        args: >
-          -Dsonar.organization=gabrielmlemes
+          args: >
+            -Dsonar.organization=gabrielmlemes
