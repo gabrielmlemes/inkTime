@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import { getReminders } from '../../_data-access-layer/reminders';
+import { DeleteAllReminders } from './delete-all-reminders';
 import { ReminderDialog } from './reminder-dialog';
 import { RemindersList } from './reminder-list';
 
@@ -19,16 +20,20 @@ export async function Reminders({ userId }: Readonly<{ userId: string }>) {
           Lembretes
         </CardTitle>
 
-        <Tooltip>
-          <TooltipTrigger>
-            <ReminderDialog />
-          </TooltipTrigger>
-          <TooltipContent side="left">Adicionar lembrete</TooltipContent>
-        </Tooltip>
+        <div className="flex items-center gap-3">
+          <DeleteAllReminders />
+
+          <Tooltip>
+            <TooltipTrigger>
+              <ReminderDialog />
+            </TooltipTrigger>
+            <TooltipContent side="top">Adicionar lembrete</TooltipContent>
+          </Tooltip>
+        </div>
       </CardHeader>
 
       <CardContent>
-        <ScrollArea className="h-96 overflow-y-auto">
+        <ScrollArea>
           {!reminders.length ? (
             <p className="text-muted-foreground text-sm">
               Você não adicionou nenhum lembrete ainda!
