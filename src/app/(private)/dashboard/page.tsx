@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import getServerSession from '@/lib/get-server-session';
 
+import { Appointments } from './_components/appointmensts/appointments';
 import { CopyLinkButton } from './_components/copy-link-button';
 import { Reminders } from './_components/reminder/reminders';
 
@@ -29,10 +30,8 @@ const Dashboard = async () => {
       </div>
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-        <div className="border-red-500 border-2">
-          <UserRoundCheck />
-          AGENDA
-        </div>
+        <Appointments userId={session.user.id} />
+
         <Reminders userId={session.user.id} />
       </section>
     </main>

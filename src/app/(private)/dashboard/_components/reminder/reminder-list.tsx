@@ -12,11 +12,13 @@ interface RemindersListProps {
 
 export function RemindersList({ reminder }: RemindersListProps) {
   return (
-    <div className="flex items-center justify-between bg-yellow-100 p-2 rounded-lg">
-      <p className="flex-1 min-w-0 break-words pr-4 text-sm text-secondary-foreground">
-        <span className="mr-2">•</span>
-        {reminder.description}
-      </p>
+    <div className="flex items-start justify-between gap-4 bg-yellow-100 p-2 rounded-lg">
+      <div className="flex-1 min-w-0">
+        <p className="text-sm text-secondary-foreground whitespace-pre-wrap wrap-break-word">
+          <span className="mr-2">•</span>
+          {reminder.description}
+        </p>
+      </div>
 
       <DeleteReminderButton id={reminder.id} />
     </div>
