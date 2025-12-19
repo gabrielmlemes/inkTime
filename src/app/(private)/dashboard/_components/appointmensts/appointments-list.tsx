@@ -1,5 +1,7 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+import { format } from 'date-fns';
 import { useSearchParams } from 'next/navigation';
 
 interface AppointmentsListProps {
@@ -9,7 +11,30 @@ interface AppointmentsListProps {
 export function AppointmentsList({ times }: AppointmentsListProps) {
   const searchParams = useSearchParams();
   const date = searchParams.get('date');
-  console.log('date', date);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['get-appointments', date],
+    queryFn: async () => {
+      let activeDate = date;
+
+      if (!activeDate) {
+        const today = format(new Date(), 'yyyy-MM-dd');
+        activeDate = today;
+      }
+
+      const url = `${process.env.NEXT_PUBLIC_APP_URL}/api/studio/appointments?date=${activeDate}`;
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        return [];
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      return data;
+    },
+  });
 
   return (
     <section>
