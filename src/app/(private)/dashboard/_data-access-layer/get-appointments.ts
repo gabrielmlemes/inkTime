@@ -16,9 +16,6 @@ export async function getAppointments({ userId }: Readonly<{ userId: string }>) 
         service: true,
         user: true,
       },
-      orderBy: {
-        date: 'asc',
-      },
     });
 
     if (!appointments) {

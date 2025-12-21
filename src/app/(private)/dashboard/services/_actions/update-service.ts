@@ -1,6 +1,5 @@
 'use server';
 import { revalidatePath } from 'next/cache';
-import { toast } from 'sonner';
 import z from 'zod';
 
 import { auth } from '@/lib/auth';

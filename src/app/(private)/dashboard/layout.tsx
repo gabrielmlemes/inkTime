@@ -1,4 +1,5 @@
 import { Toaster } from '@/components/ui/toaster';
+import { QueryClientContext } from '@/providers/query-client';
 
 import Sidebar from './_components/sidebar';
 
@@ -9,8 +10,12 @@ const DashboardLayout = ({
 }>) => {
   return (
     <>
-      <Sidebar>{children}</Sidebar>
-      <Toaster />
+      <Sidebar>
+        <QueryClientContext>
+          <Toaster />
+          {children}
+        </QueryClientContext>
+      </Sidebar>
     </>
   );
 };

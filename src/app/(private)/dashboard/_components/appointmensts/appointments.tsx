@@ -1,5 +1,6 @@
 import { UserRoundCheck } from 'lucide-react';
 
+import { getStudioTimes } from '@/app/(private)/dashboard/_actions/getStudioTimes';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -10,9 +11,7 @@ import { AppointmentsList } from './appointments-list';
 
 export async function Appointments({ userId }: Readonly<{ userId: string }>) {
   const appointments = await getAppointments({ userId });
-  const studioTimes = appointments[0]?.user.times;
-  console.log('estudiotimes', studioTimes);
-  console.log('appointments', appointments);
+  const studioTimes = await getStudioTimes({ userId });
 
   return (
     <Card>
@@ -23,7 +22,7 @@ export async function Appointments({ userId }: Readonly<{ userId: string }>) {
         </CardTitle>
 
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <ReminderDialog />
           </TooltipTrigger>
           <TooltipContent side="left">Adicionar lembrete</TooltipContent>
@@ -32,12 +31,12 @@ export async function Appointments({ userId }: Readonly<{ userId: string }>) {
 
       <CardContent>
         <ScrollArea className="h-96 overflow-y-auto">
-          {!studioTimes?.length ? (
+          {!studioTimes?.times ? (
             <p className="text-muted-foreground text-sm">
               Você não adicionou nenhum horário ainda!
             </p>
           ) : (
-            <AppointmentsList times={studioTimes} />
+            <AppointmentsList times={studioTimes.times} />
           )}
         </ScrollArea>
       </CardContent>
