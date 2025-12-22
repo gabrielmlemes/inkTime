@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import getServerSession from '@/lib/get-server-session';
 
-import { Appointments } from './_components/appointmensts/appointments';
+import { Appointments } from './_components/appointments/appointments';
 import { CopyLinkButton } from './_components/copy-link-button';
 import { Reminders } from './_components/reminder/reminders';
 
