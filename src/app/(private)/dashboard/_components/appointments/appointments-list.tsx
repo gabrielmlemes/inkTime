@@ -2,11 +2,15 @@
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { EyeIcon, X } from 'lucide-react';
+import { EyeIcon, Loader2, X } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
+import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
+import { DeleteDialog } from '@/components/ui/delete-dialog';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import { Prisma } from '../../../../../../generated/prisma';
 import { cancelAppointment } from '../../_actions/cancel-appointment';
@@ -22,6 +26,8 @@ type AppointmentWithService = Prisma.AppointmentGetPayload<{
 }>;
 
 export function AppointmentsList({ times }: AppointmentsListProps) {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const searchParams = useSearchParams();
   const date = searchParams.get('date');
   const queryClient = useQueryClient();
@@ -79,21 +85,26 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
   }
 
   async function handleCancelAppointment(appointmentId: string) {
-    const response = await cancelAppointment({ appointmentId });
-    if (!response || response.error) {
-      toast.error('Erro ao cancelar agendamento');
-      return;
-    }
+    startTransition(async () => {
+      const response = await cancelAppointment({ appointmentId });
+      if (!response || response.error) {
+        toast.error('Erro ao cancelar agendamento');
+        return;
+      }
 
-    queryClient.invalidateQueries({ queryKey: ['get-appointments'] }); // Invalida o cache para forçar a atualização e refetch();
-    await refetch(); // Faz o refetch manualmente para atualizar a lista imediatamente
-    toast.success(response.success || 'Agendamento cancelado com sucesso');
+      toast.success(response.success || 'Agendamento cancelado com sucesso');
+      setModalOpen(false);
+      queryClient.invalidateQueries({ queryKey: ['get-appointments'] }); // Invalida o cache para forçar a atualização e refetch();
+      await refetch(); // Faz o refetch manualmente para atualizar a lista imediatamente
+    });
   }
 
   return (
     <section>
       {isLoading ? (
-        <p>Carregando...</p>
+        <div className="flex justify-center items-center pt-32">
+          <Loader2 className="size-4 animate-spin" />
+        </div>
       ) : (
         times.map((slot) => {
           const occupant = occupantMap[slot];
@@ -112,13 +123,31 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
                     <Button variant="ghost" size="sm">
                       <EyeIcon size="4" />
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleCancelAppointment(occupant.id)}
-                    >
-                      <X size="4" />
-                    </Button>
+
+                    <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+                      <DialogTrigger>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="ghost" size="sm">
+                              <X size="4" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top">Cancelar agendamento</TooltipContent>
+                        </Tooltip>
+                      </DialogTrigger>
+
+                      {modalOpen && (
+                        <DeleteDialog
+                          setModalOpen={setModalOpen}
+                          dialogTitle="Cancelar agendamento"
+                          dialogDescription="Tem certeza que deseja cancelar este agendamento?"
+                          deleteText="Cancelar"
+                          cancelText="Voltar"
+                          onDelete={() => handleCancelAppointment(occupant.id)}
+                          loading={isPending}
+                        />
+                      )}
+                    </Dialog>
                   </div>
                 </div>
               </div>
