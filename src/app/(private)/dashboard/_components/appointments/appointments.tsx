@@ -5,12 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
-import { getAppointments } from '../../_data-access-layer/get-appointments';
 import { ReminderDialog } from '../reminder/reminder-dialog';
 import { AppointmentsList } from './appointments-list';
 
 export async function Appointments({ userId }: Readonly<{ userId: string }>) {
-  const appointments = await getAppointments({ userId });
   const studioTimes = await getStudioTimes({ userId });
 
   return (

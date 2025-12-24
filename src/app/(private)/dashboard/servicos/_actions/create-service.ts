@@ -34,7 +34,7 @@ export async function createService(data: CreateServiceFormData) {
       },
     });
 
-    revalidatePath('/dashboard/services');
+    revalidatePath('/dashboard/servicos');
 
     return {
       data: newService,

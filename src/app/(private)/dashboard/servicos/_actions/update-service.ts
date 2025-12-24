@@ -49,7 +49,7 @@ export async function updateServiceById({
       },
     });
 
-    revalidatePath('/dashboard/services');
+    revalidatePath('/dashboard/servicos');
 
     return { data: 'Serviço atualizado com sucesso' };
   } catch (error) {

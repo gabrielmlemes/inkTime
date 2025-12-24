@@ -101,7 +101,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Card>
             <CardHeader>
-              <CardTitle>Meu pefil</CardTitle>
+              <CardTitle>Meu perfil</CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-6">

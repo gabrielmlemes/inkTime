@@ -39,7 +39,7 @@ export async function updateProfile(data: UpdateProfileFormData) {
       },
     });
 
-    revalidatePath('/dashboard/profile');
+    revalidatePath('/dashboard/perfil');
 
     return user;
   } catch (error) {

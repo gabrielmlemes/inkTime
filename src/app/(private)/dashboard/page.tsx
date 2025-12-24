@@ -1,4 +1,11 @@
-import { Calendar, UserRoundCheck } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard | Agendamentos',
+  description: 'Gerencie seus agendamentos e lembretes.',
+};
+
+import { Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 

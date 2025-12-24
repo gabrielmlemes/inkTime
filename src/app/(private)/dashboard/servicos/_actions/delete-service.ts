@@ -33,7 +33,7 @@ export async function deleteService(formData: DeleteServiceFormSchema) {
       },
     });
 
-    revalidatePath('/dashboard/services');
+    revalidatePath('/dashboard/servicos');
 
     return { data: 'Serviço deletado com sucesso' };
   } catch (error) {

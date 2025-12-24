@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Meu perfil - Dashboard',
+  title: 'Dashboard | Meu perfil',
   description: 'Gerencie as informações do seu perfil.',
 };
 

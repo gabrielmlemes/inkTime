@@ -81,7 +81,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             <Tooltip>
               <TooltipTrigger>
                 <SidebarLink
-                  href="/dashboard/services"
+                  href="/dashboard/servicos"
                   label="Serviços"
                   icon={<Folder className="w-6 h-6 text-muted-foreground" />}
                   pathname={pathname}
@@ -96,7 +96,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             <Tooltip>
               <TooltipTrigger>
                 <SidebarLink
-                  href="/dashboard/profile"
+                  href="/dashboard/perfil"
                   label="Meu perfil"
                   icon={<Settings className="w-6 h-6 text-muted-foreground" />}
                   pathname={pathname}
@@ -109,7 +109,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             <Tooltip>
               <TooltipTrigger>
                 <SidebarLink
-                  href="/dashboard/plans"
+                  href="/dashboard/planos"
                   label="Planos"
                   icon={<Banknote className="w-6 h-6 text-muted-foreground" />}
                   pathname={pathname}
@@ -136,7 +136,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
               />
 
               <SidebarLink
-                href="/dashboard/services"
+                href="/dashboard/servicos"
                 label="Serviços"
                 icon={<Folder className="w-6 h-6" />}
                 pathname={pathname}
@@ -146,7 +146,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
               <span className="text-muted-foreground text-xs mt-4">CONFIGURAÇÕES</span>
 
               <SidebarLink
-                href="/dashboard/profile"
+                href="/dashboard/perfil"
                 label="Meu perfil"
                 icon={<Settings className="w-6 h-6" />}
                 pathname={pathname}
@@ -154,7 +154,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
               />
 
               <SidebarLink
-                href="/dashboard/plans"
+                href="/dashboard/planos"
                 label="Planos"
                 icon={<Banknote className="w-6 h-6" />}
                 pathname={pathname}

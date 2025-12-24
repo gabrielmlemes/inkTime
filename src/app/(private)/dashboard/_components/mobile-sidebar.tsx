@@ -66,7 +66,7 @@ export default function MobileDashboardSidebar({
             />
 
             <SidebarLink
-              href="/dashboard/services"
+              href="/dashboard/servicos"
               label="Serviços"
               icon={<Folder className="w-6 h-6" />}
               pathname={pathname}
@@ -76,7 +76,7 @@ export default function MobileDashboardSidebar({
             <span className="text-muted-foreground text-xs mt-4">CONFIGURAÇÕES</span>
 
             <SidebarLink
-              href="/dashboard/profile"
+              href="/dashboard/perfil"
               label="Meu perfil"
               icon={<Settings className="w-6 h-6" />}
               pathname={pathname}
@@ -84,7 +84,7 @@ export default function MobileDashboardSidebar({
             />
 
             <SidebarLink
-              href="/dashboard/plans"
+              href="/dashboard/planos"
               label="Planos"
               icon={<Banknote className="w-6 h-6" />}
               pathname={pathname}
