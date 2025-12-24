@@ -1,4 +1,4 @@
-name: SonarCloud Analysis
+name: CI – Code Quality
 
 on:
   push:
@@ -6,32 +6,37 @@ on:
       - master
 
 jobs:
-  sonar:
-    name: Analyze with SonarCloud
+  quality:
+    name: Lint, Build & SonarCloud
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Baixa o código do repositório
+      # 1. Baixa o código
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Configura o Node.js
+      # 2. Configura Node.js (use LTS para evitar incompatibilidades no CI)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.14.0
+          node-version: 20
 
       # 3. Instala dependências
       - name: Install dependencies
         run: npm install
 
-      # 4. Executa o SonarCloud
+      # 4. Executa o Lint (ESLint)
+      - name: Run ESLint
+        run: npx eslint . --max-warnings=0
+
+      # 5. Faz o build do Next.js
+      - name: Build Next.js
+        run: npm run build
+
+      # 6. Roda o SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=gabrielmlemes
