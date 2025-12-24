@@ -14,12 +14,13 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 import { Prisma } from '../../../../../../generated/prisma';
 import { cancelAppointment } from '../../_actions/cancel-appointment';
+import { AppointmentModal } from './appointment-modal';
 
 interface AppointmentsListProps {
   times: string[];
 }
 
-type AppointmentWithService = Prisma.AppointmentGetPayload<{
+export type AppointmentWithService = Prisma.AppointmentGetPayload<{
   include: {
     service: true;
   };
@@ -27,10 +28,14 @@ type AppointmentWithService = Prisma.AppointmentGetPayload<{
 
 export function AppointmentsList({ times }: AppointmentsListProps) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] = useState<AppointmentWithService | null>(
+    null
+  );
   const [isPending, startTransition] = useTransition();
+  const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const date = searchParams.get('date');
-  const queryClient = useQueryClient();
 
   const {
     data: response,
@@ -120,9 +125,28 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
 
                 <div className="ml-auto gap-1 flex">
                   <div className="flex items-center">
-                    <Button variant="ghost" size="sm">
-                      <EyeIcon size="4" />
-                    </Button>
+                    <Dialog open={appointmentModalOpen} onOpenChange={setAppointmentModalOpen}>
+                      <DialogTrigger>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => setSelectedAppointment(occupant)}
+                            >
+                              <EyeIcon size="4" />
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top">Visualizar agendamento</TooltipContent>
+                        </Tooltip>
+                      </DialogTrigger>
+
+                      {appointmentModalOpen && (
+                        <AppointmentModal
+                          appointment={selectedAppointment as unknown as AppointmentWithService}
+                        />
+                      )}
+                    </Dialog>
 
                     <Dialog open={modalOpen} onOpenChange={setModalOpen}>
                       <DialogTrigger>
