@@ -3,9 +3,8 @@ import { UserRoundCheck } from 'lucide-react';
 import { getStudioTimes } from '@/app/(private)/dashboard/_actions/getStudioTimes';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
-import { ReminderDialog } from '../reminder/reminder-dialog';
+import { AppointmentPickerButton } from './appointment-picker-button';
 import { AppointmentsList } from './appointments-list';
 
 export async function Appointments({ userId }: Readonly<{ userId: string }>) {
@@ -19,12 +18,7 @@ export async function Appointments({ userId }: Readonly<{ userId: string }>) {
           Agendamentos
         </CardTitle>
 
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <ReminderDialog />
-          </TooltipTrigger>
-          <TooltipContent side="left">Adicionar lembrete</TooltipContent>
-        </Tooltip>
+        <AppointmentPickerButton />
       </CardHeader>
 
       <CardContent>

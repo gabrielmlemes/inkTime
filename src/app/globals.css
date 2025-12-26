@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #0d0d0d;
@@ -132,4 +132,11 @@ body {
 }
 .border-foreground {
   @apply border-[var(--foreground)];
+}
+
+@layer base {
+  input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+  }
 }
