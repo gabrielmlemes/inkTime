@@ -1,3 +1,10 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'InkTime',
+  description: 'Seu estúdio favorito',
+};
+
 import Footer from '@/components/footer';
 
 import Header from './_components/header/header';
@@ -11,7 +18,9 @@ export default function Home() {
 
       <Hero />
 
-      <Professionals />
+      <div id="professionals">
+        <Professionals />
+      </div>
 
       <Footer />
     </div>

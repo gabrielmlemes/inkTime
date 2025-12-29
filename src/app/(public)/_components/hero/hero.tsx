@@ -1,9 +1,13 @@
 import Image from 'next/image';
 
 import TattooArtist from '@/assets/hero/tatuador.png';
-import { Button } from '@/components/ui/button';
 
-const Hero = () => {
+import { getStudio } from '../../_actions/getStudio';
+import { HeroButtons } from './hero-buttons';
+
+const Hero = async () => {
+  const studio = await getStudio();
+
   return (
     <section className="mt-20">
       <div className="container mx-auto px-6 md:px-8 pb-5 md:pb-0 min-h-[calc(100vh-5rem)] flex items-end justify-center">
@@ -17,21 +21,7 @@ const Hero = () => {
               simples e segura.
             </p>
 
-            <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
-              <Button
-                size="lg"
-                className="transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
-              >
-                Agendar Sessão
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
-              >
-                Explorar Artistas
-              </Button>
-            </div>
+            <HeroButtons studio={studio} />
           </article>
 
           <div className="w-2/4 max-w-xs pb-2 md:max-w-sm md:pb-0 flex-1">

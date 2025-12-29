@@ -2,6 +2,7 @@ import { ArrowRight, Circle } from 'lucide-react';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
+import { User } from '../../../../../generated/prisma';
 import { Button } from '../../../../components/ui/button';
 
 interface CardProps {
@@ -10,9 +11,10 @@ interface CardProps {
     style: string;
     image: StaticImageData;
   };
+  studio?: User | null;
 }
 
-const Card = ({ artist }: CardProps) => {
+const Card = ({ artist, studio }: CardProps) => {
   return (
     <div className="group flex flex-col overflow-hidden rounded-lg border border-border bg-muted shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
       <div className="overflow-hidden">
@@ -44,8 +46,7 @@ const Card = ({ artist }: CardProps) => {
           className="mt-4 w-full transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
           aria-label={`Agendar sessão com ${artist.name}`}
         >
-          {/* href = /studio/123 */}
-          <Link href="#">
+          <Link href={`/estudio/${studio?.id}`}>
             Agendar Sessão
             <ArrowRight className="ml-1 h-4 w-4" aria-hidden="true" />
           </Link>
