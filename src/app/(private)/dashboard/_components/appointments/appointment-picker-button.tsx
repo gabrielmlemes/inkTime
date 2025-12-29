@@ -1,12 +1,25 @@
 'use client';
 
 import { format } from 'date-fns';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export function AppointmentPickerButton() {
-  const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const searchParams = useSearchParams();
   const router = useRouter();
+  const dateFromUrl = searchParams.get('date');
+
+  // Inicializa com a data da URL (se existir) ou com a data atual
+  const [selectedDate, setSelectedDate] = useState(dateFromUrl || format(new Date(), 'yyyy-MM-dd'));
+
+  // Sincroniza o estado quando a URL mudar (ex: refresh da página)
+  useEffect(() => {
+    if (dateFromUrl) {
+      setSelectedDate(dateFromUrl);
+    } else {
+      setSelectedDate(format(new Date(), 'yyyy-MM-dd'));
+    }
+  }, [dateFromUrl]);
 
   const handleChangeDate = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedDate(event.target.value);
