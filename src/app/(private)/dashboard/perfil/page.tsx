@@ -5,7 +5,9 @@ export const metadata: Metadata = {
   description: 'Gerencie as informações do seu perfil.',
 };
 
+import { Loader2Icon } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 
 import getServerSession from '@/lib/get-server-session';
 
@@ -25,7 +27,17 @@ const Profile = async () => {
     redirect('/login');
   }
 
-  return <ProfileForm user={user} />;
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <Loader2Icon className="animate-spin h-10 w-10" />
+        </div>
+      }
+    >
+      <ProfileForm user={user} />
+    </Suspense>
+  );
 };
 
 export default Profile;

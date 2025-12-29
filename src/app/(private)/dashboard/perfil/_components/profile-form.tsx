@@ -36,7 +36,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { generateTime } from '@/helpers/generate-hours';
-import { timeZonesFormatted } from '@/helpers/time-zones';
 import { cn } from '@/lib/utils';
 import { extractDigits, formatPhone } from '@/utils/format-phone';
 
@@ -71,7 +70,6 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
     address: user.address,
     phone: user.phone ? formatPhone(user.phone) : '',
     status: user.status,
-    timezone: user.timezone,
   });
 
   async function onSubmit(data: ProfileFormData) {
@@ -84,7 +82,6 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
           address: data.address,
           phone: phoneDigits,
           status: data.status,
-          timezone: data.timezone,
           times: selectedTimes || [],
         });
         toast.success('Perfil atualizado com sucesso!', { closeButton: true });
@@ -238,37 +235,6 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                     </DialogContent>
                   </Dialog>
                 </div>
-
-                <FormField
-                  name="timezone"
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="font-bold">Fuso horário:</FormLabel>
-
-                      <FormControl>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <SelectTrigger className="w-full justify-between">
-                            <SelectValue placeholder="Selecione o seu fuso horário (opcional)" />
-                          </SelectTrigger>
-
-                          <SelectContent className="bg-muted">
-                            {timeZonesFormatted.map((zone) => (
-                              <SelectItem
-                                value={zone}
-                                key={zone}
-                                className="hover:border cursor-pointer"
-                              >
-                                {zone}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
 
                 <Button type="submit" className="w-full" loading={isPending}>
                   Salvar alterações

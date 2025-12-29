@@ -5,7 +5,6 @@ export const profileSchema = z.object({
   phone: z.string().min(1, 'O telefone é obrigatório'),
   status: z.boolean(),
   address: z.string().optional(),
-  timezone: z.string().optional(),
 });
 
 export type ProfileFormData = z.infer<typeof profileSchema>;

@@ -5,9 +5,11 @@ export const metadata: Metadata = {
   description: 'Gerencie seus agendamentos e lembretes.',
 };
 
+import { Loader2Icon } from 'lucide-react';
 import { Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 
 import { Button } from '@/components/ui/button';
 import getServerSession from '@/lib/get-server-session';
@@ -37,9 +39,25 @@ const Dashboard = async () => {
       </div>
 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-        <Appointments userId={session.user.id} />
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center min-h-[400px]">
+              <Loader2Icon className="animate-spin h-10 w-10" />
+            </div>
+          }
+        >
+          <Appointments userId={session.user.id} />
+        </Suspense>
 
-        <Reminders userId={session.user.id} />
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center min-h-[400px]">
+              <Loader2Icon className="animate-spin h-10 w-10" />
+            </div>
+          }
+        >
+          <Reminders userId={session.user.id} />
+        </Suspense>
       </section>
     </main>
   );

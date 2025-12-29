@@ -12,7 +12,7 @@ export async function Appointments({ userId }: Readonly<{ userId: string }>) {
 
   return (
     <Card>
-      <CardHeader className="flex items-center justify-between">
+      <CardHeader className="flex flex-col lg:flex-row items-center justify-between">
         <CardTitle className="text-xl lg:text-2xl flex items-center gap-2">
           <UserRoundCheck />
           Agendamentos

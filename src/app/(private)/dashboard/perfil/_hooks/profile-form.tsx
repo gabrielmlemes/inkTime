@@ -8,16 +8,9 @@ interface UserProfileFormProps {
   address: string | null;
   phone: string | null;
   status: boolean;
-  timezone: string | null;
 }
 
-export default function useProfileForm({
-  name,
-  address,
-  phone,
-  status,
-  timezone,
-}: UserProfileFormProps) {
+export default function useProfileForm({ name, address, phone, status }: UserProfileFormProps) {
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
     mode: 'onBlur',
@@ -26,7 +19,6 @@ export default function useProfileForm({
       address: address || '',
       phone: phone || '',
       status: status || false,
-      timezone: timezone || '',
     },
   });
   return form;

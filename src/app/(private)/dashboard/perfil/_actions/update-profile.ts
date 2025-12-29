@@ -10,7 +10,6 @@ const updateProfileSchema = z.object({
   phone: z.string().min(1, 'O telefone é obrigatório'),
   status: z.boolean(),
   address: z.string().optional(),
-  timezone: z.string().optional(),
   times: z.array(z.string()),
 });
 export type UpdateProfileFormData = z.infer<typeof updateProfileSchema>;
@@ -35,7 +34,6 @@ export async function updateProfile(data: UpdateProfileFormData) {
         phone: data.phone,
         status: data.status,
         times: data.times,
-        timezone: data.timezone,
       },
     });
 
