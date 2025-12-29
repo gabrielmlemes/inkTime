@@ -14,8 +14,8 @@ export async function GET(request: NextRequest) {
 
   try {
     const [year, month, day] = dateParam.split('-').map(Number); // Converte a data recebida em um objeto Date para manipulação posterior
-    const startDate = new Date(year, month - 1, day, 0, 0, 0); // Início do dia
-    const endDate = new Date(year, month - 1, day, 23, 59, 59, 999); // Fim do dia
+    const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0)); // Início do dia
+    const endDate = new Date(Date.UTC(year, month - 1, day, 23, 59, 59, 999)); // Fim do dia
 
     const user = await prisma.user.findFirst({
       where: {

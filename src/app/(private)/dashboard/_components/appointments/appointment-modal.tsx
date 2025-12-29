@@ -49,7 +49,14 @@ export function AppointmentModal({ appointment }: AppointmentModalProps) {
         </div>
         <div className="flex gap-1">
           <Label className="font-semibold">Data:</Label>
-          <p className="text-sm text-muted-foreground">{format(appointment.date, 'dd/MM/yyyy')}</p>
+          <p className="text-sm text-muted-foreground">
+            {new Intl.DateTimeFormat('pt-BR', {
+              timeZone: 'UTC',
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            }).format(new Date(appointment.date))}
+          </p>
         </div>
         <div className="flex gap-1">
           <Label className="font-semibold">Horário agendado:</Label>
