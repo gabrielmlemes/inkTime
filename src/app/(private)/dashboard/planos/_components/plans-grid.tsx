@@ -1,5 +1,4 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,6 +8,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { subscriptionPlans } from '@/utils/plans';
+
+import { SubscriptionButton } from './subscription-button';
 
 export function PlansGrid() {
   return (
@@ -45,9 +46,7 @@ export function PlansGrid() {
           </CardContent>
 
           <CardFooter className="mt-auto">
-            <Button variant="outline" className="w-full font-semibold">
-              Ativar assinatura
-            </Button>
+            <SubscriptionButton type={plan.id === 'BASIC' ? 'BASIC' : 'PROFESSIONAL'} />
           </CardFooter>
         </Card>
       ))}
