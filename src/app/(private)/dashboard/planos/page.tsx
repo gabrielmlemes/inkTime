@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 
 import getServerSession from '@/lib/get-server-session';
 
+import getSubscription from '../../_data-access-layer/get-subscription';
 import { PlansGrid } from './_components/plans-grid';
 
 export const metadata: Metadata = {
@@ -19,6 +20,11 @@ export default async function Plans() {
     redirect('/login');
   }
 
+  const subscription = await getSubscription({
+    userId: session.user.id,
+  });
+  console.log(subscription);
+
   return (
     <Suspense
       fallback={
@@ -27,7 +33,9 @@ export default async function Plans() {
         </div>
       }
     >
-      <PlansGrid />
+      {subscription?.status !== 'active' && <PlansGrid />}
+
+      {subscription?.status === 'active' && <p>Assinatura ativa</p>}
     </Suspense>
   );
 }
