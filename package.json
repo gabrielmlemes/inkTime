@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "prepare": "husky install",
-    "lint:fix": "eslint . --fix && prettier --write ."
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/api/webhook"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
