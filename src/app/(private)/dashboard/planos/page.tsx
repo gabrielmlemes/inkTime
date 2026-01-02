@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
 import getServerSession from '@/lib/get-server-session';
 
-import getSubscription from '../../_data-access-layer/get-subscription';
+import getSubscription from '../../_stripe-data-access/get-subscription';
 import { PlansGrid } from './_components/plans-grid';
 
 export const metadata: Metadata = {
