@@ -7,6 +7,7 @@ import getServerSession from '@/lib/get-server-session';
 
 import getSubscription from '../../_stripe-data-access/get-subscription';
 import { PlansGrid } from './_components/plans-grid';
+import { SubscriptionDetail } from './_components/subscription-details';
 
 export const metadata: Metadata = {
   title: 'Dashboard | Planos',
@@ -35,7 +36,7 @@ export default async function Plans() {
     >
       {subscription?.status !== 'active' && <PlansGrid />}
 
-      {subscription?.status === 'active' && <p>Assinatura ativa</p>}
+      {subscription?.status === 'active' && <SubscriptionDetail subscription={subscription!} />}
     </Suspense>
   );
 }
