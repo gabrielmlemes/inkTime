@@ -35,7 +35,7 @@ export function SubscriptionDetail({ subscription }: SubscriptionDetailProps) {
   }
 
   return (
-    <Card className="mx-auto">
+    <Card className="w-full mx-auto">
       <CardHeader>
         <CardTitle className="text-3xl font-semibold">Plano atual</CardTitle>
         <CardDescription className="flex items-center gap-2">

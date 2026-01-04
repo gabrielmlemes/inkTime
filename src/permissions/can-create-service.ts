@@ -19,6 +19,7 @@ export async function canCreateService(
     const serviceCount = await prisma.services.count({
       where: {
         userId: session?.user?.id,
+        isActive: true,
       },
     });
 
@@ -27,10 +28,10 @@ export async function canCreateService(
       const plan = subscription.plan; // 'BASIC' | 'PROFESSIONAL'
       const planLimits = await getPlans(plan); // Limite do plano
 
-      console.log('Limites do seu plano: ', planLimits);
+      // console.log('Limites do seu plano: ', planLimits);
 
       return {
-        hasPermission: planLimits.maxServices === null || serviceCount <= planLimits.maxServices, // Verifica se a quantidade de serviços que o cliente já tem cadastrado é menor que a quantidade máxima (maxServices) que o plano atual dele suporta. Se for, hasPermission será true!
+        hasPermission: planLimits.maxServices === null || serviceCount < planLimits.maxServices, // Verifica se o maxServices do plano dele é ilimitado (null), ou a quantidade de serviços que o cliente já tem cadastrado é menor que a quantidade máxima (maxServices) que o plano atual dele suporta. Se for, hasPermission será true!
         planId: plan, // É o ID do plano ativo do cliente = 'BASIC' OU 'PROFESSIONAL'
         expired: false,
         plan: PLANS[plan],

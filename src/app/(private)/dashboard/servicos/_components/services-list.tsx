@@ -1,5 +1,6 @@
 'use client';
-import { PencilIcon, PlusIcon, TrashIcon } from 'lucide-react';
+import { PencilIcon, PencilOff, PlusIcon, TrashIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -15,6 +16,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { formatCurrency } from '@/helpers/format-currency';
+import { ResultPermissionProps } from '@/permissions/has-permission';
 
 import { Services } from '../../../../../../generated/prisma';
 import { deleteService } from '../_actions/delete-service';
@@ -22,12 +24,16 @@ import { DialogServiceForm } from './dialog-service.form';
 
 interface ServicesListProps {
   services: Services[];
+  permissions: ResultPermissionProps;
 }
 
-export function ServicesList({ services }: ServicesListProps) {
+export function ServicesList({ services, permissions }: ServicesListProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [editingService, setEditingService] = useState<Services | null>(null);
+
+  const serviceList =
+    permissions.hasPermission && permissions.planId !== 'BASIC' ? services : services.slice(0, 3);
 
   async function handleDeleteService({ serviceId }: { serviceId: string }) {
     try {
@@ -64,13 +70,24 @@ export function ServicesList({ services }: ServicesListProps) {
       <section className="mx-auto">
         <Card>
           <CardHeader className="flex items-center">
-            <CardTitle className="text-xl md:text-3 xl font-bold">Serviços</CardTitle>
+            <CardTitle className="text-xl md:text-3xl font-bold">Serviços</CardTitle>
 
-            <DialogTrigger asChild>
-              <Button variant="default" className="ml-auto">
-                <PlusIcon className="size-4" />
-              </Button>
-            </DialogTrigger>
+            {permissions.hasPermission && (
+              <DialogTrigger asChild>
+                <Button variant="default" className="ml-auto">
+                  <PlusIcon className="size-4" />
+                </Button>
+              </DialogTrigger>
+            )}
+
+            {!permissions.hasPermission && (
+              <Link
+                href="/dashboard/planos"
+                className="ml-auto border text-muted-foreground rounded-md px-3 py-2 hover:bg-red-500/60 hover:border-red-500/60 font-semibold hover:text-white duration-200 transition-all"
+              >
+                <PencilOff />
+              </Link>
+            )}
 
             <DialogContent
               onInteractOutside={(e) => {
@@ -110,7 +127,7 @@ export function ServicesList({ services }: ServicesListProps) {
                 <p className="text-sm text-muted-foreground">Nenhum serviço cadastrado.</p>
               ) : (
                 <article className="space-y-4">
-                  {services.map((service) => (
+                  {serviceList.map((service) => (
                     <div
                       key={service.id}
                       className="flex items-center justify-between gap-2 border-b pb-3"

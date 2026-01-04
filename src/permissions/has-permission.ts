@@ -9,7 +9,7 @@ import { PlanDetailInfo } from './get-plans';
 type PLAN_PROP = 'BASIC' | 'PROFESSIONAL' | 'TRIAL' | 'EXPIRED';
 
 interface HasPermissionProps {
-  type: string;
+  type: 'service';
 }
 
 export interface ResultPermissionProps {
