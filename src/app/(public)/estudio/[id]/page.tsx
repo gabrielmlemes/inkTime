@@ -5,7 +5,7 @@ import ScheduleContent from './_components/schedule-content';
 import { getStudioInfo } from './_data-access/get-estudio-info';
 
 export const metadata: Metadata = {
-  title: 'Agendamento - InkTime',
+  title: 'Agendamento - InkPRO',
   description: 'Agendamento facilitado para você!',
 };
 

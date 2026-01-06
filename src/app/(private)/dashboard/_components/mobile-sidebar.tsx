@@ -7,7 +7,6 @@ import { Divider } from '@/components/ui/divider';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import SidebarLink from './sidebar-links';
-import { UserInfo } from './user-info';
 
 interface MobileDashboardSidebarProps {
   pathname: string;
@@ -94,7 +93,6 @@ export default function MobileDashboardSidebar({
 
           <div className="mt-auto flex flex-col gap-4 items-center mb-3">
             <Divider />
-            <UserInfo session={session} />
             <Button onClick={handleSignOut} className="w-full">
               Sair
             </Button>

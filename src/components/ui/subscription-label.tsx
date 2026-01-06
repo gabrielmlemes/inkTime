@@ -16,7 +16,7 @@ export function SubscriptionLabel({ expired }: { expired: boolean }) {
 
       <Link
         href="/dashboard/planos"
-        className="w-fit px-1 py-1 hover:scale-105 font-semibold duration-200 transition-all"
+        className="w-fit px-1 py-1 hover:scale-105 font-semibold duration-200 transition-all underline-offset-2 underline"
       >
         Acessar plano
       </Link>

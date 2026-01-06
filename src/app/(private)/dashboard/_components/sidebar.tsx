@@ -21,7 +21,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 import MobileDashboardSidebar from './mobile-sidebar';
 import SidebarLink from './sidebar-links';
-import { UserInfo } from './user-info';
 
 const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const { data: session, status, update } = useSession();
@@ -164,7 +163,6 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 
             <div className="mt-auto flex flex-col gap-4 items-center">
               <Divider />
-              <UserInfo session={session} status={status} />
               <Button onClick={handleSignOut} className="w-full">
                 Sair
               </Button>

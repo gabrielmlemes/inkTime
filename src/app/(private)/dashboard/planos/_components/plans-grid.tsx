@@ -27,14 +27,14 @@ export function PlansGrid() {
 
           <CardHeader>
             <CardTitle className="text-3xl font-semibold">{plan.name}</CardTitle>
-            <CardDescription className="text-lg text-gray-600">{plan.description}</CardDescription>
+            <CardDescription className="text-lg text-gray-500">{plan.description}</CardDescription>
           </CardHeader>
 
           <CardContent>
             <ul>
               {plan.features.map((feature, index) => (
                 <li key={index} className="md:text-lg">
-                  ○ {feature}
+                  • {feature}
                 </li>
               ))}
             </ul>

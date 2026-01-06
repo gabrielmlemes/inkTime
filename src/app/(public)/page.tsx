@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'InkTime',
-  description: 'Seu estúdio favorito',
+  title: 'InkPRO',
+  description: 'Gerencie seu estúdio',
 };
 
 import Footer from '@/components/footer';
