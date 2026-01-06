@@ -33,7 +33,9 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
   const [editingService, setEditingService] = useState<Services | null>(null);
 
   const serviceList =
-    permissions.hasPermission && permissions.planId !== 'BASIC' ? services : services.slice(0, 0);
+    permissions.hasPermission && permissions.planId !== 'BASIC'
+      ? services
+      : services.filter((service) => service.isActive === true).slice(0, 3);
 
   async function handleDeleteService({ serviceId }: { serviceId: string }) {
     try {
