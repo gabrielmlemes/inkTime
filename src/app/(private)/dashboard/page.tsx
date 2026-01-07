@@ -12,7 +12,10 @@ import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
 import { Button } from '@/components/ui/button';
+import { SubscriptionLabel } from '@/components/ui/subscription-label';
+import { TrialLabel } from '@/components/ui/trial-label';
 import getServerSession from '@/lib/get-server-session';
+import { checkSubscription } from '@/permissions/check-subscription';
 
 import { Appointments } from './_components/appointments/appointments';
 import { CopyLinkButton } from './_components/copy-link-button';
@@ -25,40 +28,57 @@ const Dashboard = async () => {
     return redirect('/login');
   }
 
+  const subscription = await checkSubscription({
+    userId: session.user.id,
+  });
+
   return (
     <main>
-      <div className="flex justify-end gap-4 mt-4">
-        <Link target="_blank" href={`/estudio/${session.user.id!}`}>
-          <Button>
-            <Calendar size="5" />
-            <span>Novo agendamento</span>
-          </Button>
-        </Link>
+      {subscription?.subscriptionStatus !== 'EXPIRED' && (
+        <div className="flex justify-end gap-4 mt-4">
+          <Link target="_blank" href={`/estudio/${session.user.id!}`}>
+            <Button>
+              <Calendar size="5" />
+              <span>Novo agendamento</span>
+            </Button>
+          </Link>
 
-        <CopyLinkButton userId={session.user.id} />
-      </div>
+          <CopyLinkButton userId={session.user.id} />
+        </div>
+      )}
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center min-h-[400px]">
-              <Loader2Icon className="animate-spin h-10 w-10" />
-            </div>
-          }
-        >
-          <Appointments userId={session.user.id} />
-        </Suspense>
+      {subscription?.subscriptionStatus === 'EXPIRED' && <SubscriptionLabel expired={true} />}
 
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center min-h-[400px]">
-              <Loader2Icon className="animate-spin h-10 w-10" />
-            </div>
-          }
-        >
-          <Reminders userId={session.user.id} />
-        </Suspense>
-      </section>
+      {subscription?.subscriptionStatus === 'TRIAL' && <TrialLabel subscription={subscription} />}
+      {/* {subscription?.subscriptionStatus === 'TRIAL' && (
+        <div className="my-2">
+          <h3 className="font-semibold text-lg text-muted-foreground">{subscription.message}</h3>
+        </div>
+      )} */}
+
+      {subscription?.subscriptionStatus !== 'EXPIRED' && (
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center min-h-[400px]">
+                <Loader2Icon className="animate-spin h-10 w-10" />
+              </div>
+            }
+          >
+            <Appointments userId={session.user.id} />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center min-h-[400px]">
+                <Loader2Icon className="animate-spin h-10 w-10" />
+              </div>
+            }
+          >
+            <Reminders userId={session.user.id} />
+          </Suspense>
+        </section>
+      )}
     </main>
   );
 };

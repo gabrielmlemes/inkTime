@@ -1,4 +1,9 @@
+import { redirect } from 'next/navigation';
+
 import { SubscriptionLabel } from '@/components/ui/subscription-label';
+import { TrialLabel } from '@/components/ui/trial-label';
+import getServerSession from '@/lib/get-server-session';
+import { checkSubscription } from '@/permissions/check-subscription';
 import { hasPermission } from '@/permissions/has-permission';
 
 import { getServices } from '../_data-access/get-services';
@@ -9,23 +14,26 @@ interface ServiceContentProps {
 }
 
 export async function ServiceContent({ userId }: ServiceContentProps) {
+  const session = await getServerSession();
+
+  if (!session) {
+    throw new Error('Unauthorized');
+  }
+
   const services = await getServices({ userId });
   const permissions = await hasPermission({ type: 'service' });
-  console.log('permissões: ', permissions);
+  const subscription = await checkSubscription({ userId: session.user.id });
+  // console.log('permissões: ', permissions);
 
   return (
     <>
-      {permissions.planId === 'TRIAL' && (
-        <div className="my-2">
-          <h3 className="font-semibold text-lg text-muted-foreground">
-            Você está no seu período de teste gratuito
-          </h3>
-        </div>
-      )}
+      {permissions.planId === 'TRIAL' && <TrialLabel subscription={subscription} />}
 
       {!permissions.hasPermission && <SubscriptionLabel expired={permissions.expired} />}
 
-      <ServicesList services={services || []} permissions={permissions} />
+      {permissions.planId !== 'EXPIRED' && (
+        <ServicesList services={services || []} permissions={permissions} />
+      )}
     </>
   );
 }
