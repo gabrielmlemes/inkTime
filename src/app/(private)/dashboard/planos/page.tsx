@@ -24,7 +24,7 @@ export default async function Plans() {
   const subscription = await getSubscription({
     userId: session.user.id,
   });
-  console.log('dados da assinatura ativa: ', subscription);
+  // console.log('dados da assinatura ativa: ', subscription);
 
   return (
     <Suspense

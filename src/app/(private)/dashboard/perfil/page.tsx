@@ -9,7 +9,10 @@ import { Loader2Icon } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
+import { SubscriptionLabel } from '@/components/ui/subscription-label';
+import { TrialLabel } from '@/components/ui/trial-label';
 import getServerSession from '@/lib/get-server-session';
+import { checkSubscription } from '@/permissions/check-subscription';
 
 import ProfileForm from './_components/profile-form';
 import { getUserInfo } from './_data-access/get-user-info';
@@ -27,6 +30,10 @@ const Profile = async () => {
     redirect('/login');
   }
 
+  const subscription = await checkSubscription({
+    userId: session.user.id,
+  });
+
   return (
     <Suspense
       fallback={
@@ -35,7 +42,13 @@ const Profile = async () => {
         </div>
       }
     >
-      <ProfileForm user={user} />
+      {subscription?.subscriptionStatus === 'TRIAL' && <TrialLabel subscription={subscription} />}
+
+      {!subscription || subscription?.subscriptionStatus === 'EXPIRED' ? (
+        <SubscriptionLabel expired={true} />
+      ) : (
+        <ProfileForm user={user} />
+      )}
     </Suspense>
   );
 };

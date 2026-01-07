@@ -1,9 +1,11 @@
 import { MapPin, Phone, UserCircle, UserIcon } from 'lucide-react';
 import Image from 'next/image';
 
+import { checkSubscription } from '@/permissions/check-subscription';
 import { formatPhone } from '@/utils/format-phone';
 
 import { Prisma } from '../../../../../../generated/prisma/client';
+import { ScheduleBlocked } from './schedule-blocked';
 import { ScheduleForm } from './schedule-form';
 
 export type ScheduleContentProps = Prisma.UserGetPayload<{
@@ -15,8 +17,12 @@ export type ScheduleContentProps = Prisma.UserGetPayload<{
   };
 }>;
 
-export default function ScheduleContent({ user }: { user: ScheduleContentProps }) {
+export default async function ScheduleContent({ user }: { user: ScheduleContentProps }) {
   const formattedPhone = formatPhone(user.phone ?? '');
+  const subscription = await checkSubscription({
+    userId: user.id,
+  });
+  console.log('subscription', subscription);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -53,7 +59,11 @@ export default function ScheduleContent({ user }: { user: ScheduleContentProps }
               )}
             </div>
 
-            <ScheduleForm user={user} />
+            {user.subscription || subscription?.subscriptionStatus === 'TRIAL' ? (
+              <ScheduleForm user={user} />
+            ) : (
+              <ScheduleBlocked />
+            )}
           </article>
         </div>
       </section>

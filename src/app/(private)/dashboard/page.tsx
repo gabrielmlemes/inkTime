@@ -50,11 +50,6 @@ const Dashboard = async () => {
       {subscription?.subscriptionStatus === 'EXPIRED' && <SubscriptionLabel expired={true} />}
 
       {subscription?.subscriptionStatus === 'TRIAL' && <TrialLabel subscription={subscription} />}
-      {/* {subscription?.subscriptionStatus === 'TRIAL' && (
-        <div className="my-2">
-          <h3 className="font-semibold text-lg text-muted-foreground">{subscription.message}</h3>
-        </div>
-      )} */}
 
       {subscription?.subscriptionStatus !== 'EXPIRED' && (
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
