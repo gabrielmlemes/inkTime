@@ -2,8 +2,6 @@
 
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { ChevronDownIcon } from 'lucide-react';
-import { UserCircle } from 'lucide-react';
-import Image from 'next/image';
 import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
@@ -43,6 +41,7 @@ import { Prisma } from '../../../../../../generated/prisma/client';
 import { updateProfile } from '../_actions/update-profile';
 import useProfileForm from '../_hooks/profile-form';
 import { ProfileFormData } from '../_schemas/profile-schema';
+import { AvatarProfile } from './profile-avatar';
 
 type UserWithSubscription = Prisma.UserGetPayload<{
   include: { subscription: true };
@@ -103,18 +102,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
 
             <CardContent className="space-y-6">
               <div className="flex justify-center">
-                <div className="relative w-40 h-40 rounded-full overflow-hidden bg-gray-100">
-                  {user.image ? (
-                    <Image
-                      alt="Imagem do perfil do estúdio"
-                      src={user.image}
-                      className="object-cover"
-                      fill
-                    />
-                  ) : (
-                    <UserCircle className="w-full h-full text-gray-400" />
-                  )}
-                </div>
+                <AvatarProfile imageUrl={user.image} userId={user.id} />
               </div>
 
               <div className="space-y-6">

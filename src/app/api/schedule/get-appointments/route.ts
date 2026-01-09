@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import prisma from '@/lib/prisma';
 
+// Rota chamada na página (pública) de agendamentos dos clientes
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
 
