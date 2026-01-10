@@ -23,7 +23,7 @@ export async function Appointments({ userId }: Readonly<{ userId: string }>) {
 
       <CardContent>
         <ScrollArea className="h-96 overflow-y-auto">
-          {!studioTimes?.times ? (
+          {!studioTimes?.times || studioTimes.times.length === 0 ? (
             <p className="text-muted-foreground text-sm">
               Você não adicionou nenhum horário ainda!
             </p>

@@ -36,8 +36,6 @@ export function AvatarProfile({ imageUrl, userId }: AvatarProfileProps) {
 
       const data = await response.json();
 
-      toast.success('Imagem enviada com sucesso!');
-
       return data.secure_url as string;
     } catch (error) {
       console.log(error);

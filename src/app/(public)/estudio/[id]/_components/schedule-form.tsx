@@ -252,28 +252,32 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
             {user.status === true && selectedService && (
               <div className="space-y-2">
                 <FormLabel>Horários disponíveis</FormLabel>
-                <div className="border border-gray-600 shadow-lg shadow-gray-7 p-4 rounded-lg">
-                  {loadingTimes ? (
-                    <LoaderCircle className="animate-spin mx-auto" />
-                  ) : (
-                    <ScheduleTimesList
-                      studioTimes={user.times}
-                      blockedTimes={blockedTimes}
-                      availableTimes={availableTimes}
-                      selectedDate={selectedDate}
-                      selectedTime={selectedTime}
-                      onTimeSelect={(time) => setSelectedTime(time)}
-                      requiredSlots={
-                        user.services.find((service) => service.id === selectedService)
-                          ? Math.ceil(
-                              user.services.find((service) => service.id === selectedService)!
-                                .duration / 30
-                            )
-                          : 1
-                      }
-                    />
-                  )}
-                </div>
+                {user.times && user.times.length > 0 ? (
+                  <div className="border border-gray-600 shadow-lg shadow-gray-7 p-4 rounded-lg">
+                    {loadingTimes ? (
+                      <LoaderCircle className="animate-spin mx-auto" />
+                    ) : (
+                      <ScheduleTimesList
+                        studioTimes={user.times}
+                        blockedTimes={blockedTimes}
+                        availableTimes={availableTimes}
+                        selectedDate={selectedDate}
+                        selectedTime={selectedTime}
+                        onTimeSelect={(time) => setSelectedTime(time)}
+                        requiredSlots={
+                          user.services.find((service) => service.id === selectedService)
+                            ? Math.ceil(
+                                user.services.find((service) => service.id === selectedService)!
+                                  .duration / 30
+                              )
+                            : 1
+                        }
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">Nenhum horário disponível</p>
+                )}
               </div>
             )}
 
