@@ -1,52 +1,27 @@
-'use client';
+import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
-import { handleLogin } from '@/app/(private)/_actions/login';
-import { Button } from '@/components/ui/button';
+import getServerSession from '@/lib/get-server-session';
 
-const LoginPage = () => {
-  // const session = null; // adicionar lógica da sessão aqui
+import { SignInForm } from './_components/sign-in-form';
 
-  async function handleSignIn() {
-    await handleLogin('github');
+export const metadata: Metadata = {
+  title: 'InkPRO - Login',
+  description: 'Faça seu login para acessar a plataforma.',
+};
+
+export default async function LoginPage() {
+  const session = await getServerSession();
+
+  if (session) {
+    return redirect('/dashboard');
   }
 
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-gray-100">
+    <div className="flex h-screen w-full items-center justify-center bg-gray-200">
       <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
-        <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">Acesso ao Stúdio</h1>
-        <form className="flex flex-col gap-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-600">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="seu@email.com"
-              className="mt-1 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 placeholder:text-gray-400 text-gray-700"
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-600">
-              Senha
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="********"
-              className="mt-1 w-full rounded-md border border-gray-300 p-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 placeholder:text-gray-400 text-gray-700"
-            />
-          </div>
-          <Button
-            onClick={handleSignIn}
-            className="mt-4 w-full rounded-md bg-indigo-600 py-3 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Entrar
-          </Button>
-        </form>
+        <SignInForm />
       </div>
     </div>
   );
-};
-
-export default LoginPage;
+}
