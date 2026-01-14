@@ -1,3 +1,6 @@
+'use client'; // Ensure this is at the top if not already present
+
+import { motion } from 'framer-motion'; // Import motion
 import { AppWindow, Bell, CalendarDays, LayoutGrid, Sparkles, Users } from 'lucide-react';
 
 const features = [
@@ -28,6 +31,21 @@ const features = [
 ];
 
 export const FeaturesSection = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Stagger children animations
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <section className="bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -41,10 +59,16 @@ export const FeaturesSection = () => {
             para você.
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+        <motion.div
+          className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show" // Animate when in view
+          viewport={{ once: true, amount: 0.3 }} // Only animate once and when 30% of the item is visible
+        >
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
             {features.map((feature) => (
-              <div key={feature.name} className="relative pl-16">
+              <motion.div key={feature.name} className="relative pl-16" variants={itemVariants}>
                 <dt className="text-base font-semibold leading-7 text-foreground">
                   <div className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-lg bg-secondary">
                     <feature.icon className="h-6 w-6 text-primary" aria-hidden="true" />
@@ -54,10 +78,10 @@ export const FeaturesSection = () => {
                 <dd className="mt-2 text-base leading-7 text-muted-foreground">
                   {feature.description}
                 </dd>
-              </div>
+              </motion.div>
             ))}
           </dl>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

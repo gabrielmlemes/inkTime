@@ -1,3 +1,6 @@
+'use client'; // Ensure this is at the top if not already present
+
+import { motion } from 'framer-motion'; // Import motion
 import { ArrowRight } from 'lucide-react';
 
 const steps = [
@@ -21,6 +24,21 @@ const steps = [
 ];
 
 export const HowItWorksSection = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Stagger children animations
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <section className="bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -48,17 +66,27 @@ export const HowItWorksSection = () => {
             }}
           />
 
-          <dl className="grid grid-cols-1 gap-y-16 text-center lg:grid-cols-3 lg:gap-x-8">
+          <motion.dl
+            className="grid grid-cols-1 gap-y-16 text-center lg:grid-cols-3 lg:gap-x-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+          >
             {steps.map((step) => (
-              <div key={step.name} className="relative flex flex-col items-center">
+              <motion.div
+                key={step.name}
+                className="relative flex flex-col items-center"
+                variants={itemVariants}
+              >
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary text-2xl font-bold text-primary ring-2 ring-border">
                   {step.step.charAt(1)}
                 </div>
                 <h3 className="mt-6 text-xl font-semibold text-foreground">{step.name}</h3>
                 <p className="mt-2 text-base text-muted-foreground">{step.description}</p>
-              </div>
+              </motion.div>
             ))}
-          </dl>
+          </motion.dl>
         </div>
       </div>
     </section>

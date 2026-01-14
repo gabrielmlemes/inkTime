@@ -22,6 +22,9 @@
   --muted: #a1a1aa; /* Muted gray for less important text */
   --muted-foreground: #f5f5f5;
 
+  --destructive: #de1b1b; /* Amber for destructive elements */
+  --destructive-foreground: #7a0b0b;
+
   --border: #27272a; /* Subtle border color */
   --input: #27272a;
   --ring: #f59e0b;
@@ -92,6 +95,13 @@ h6 {
   @apply text-[var(--foreground)];
 }
 
+.text-destructive {
+  @apply text-[var(--destructive)];
+}
+.text-destructive-foreground {
+  @apply text-[var(--destructive-foreground)];
+}
+
 /* Background colors */
 .bg-primary {
   @apply bg-[var(--primary)];
@@ -126,6 +136,13 @@ h6 {
 }
 .bg-foreground {
   @apply bg-[var(--foreground)];
+}
+
+.bg-destructive {
+  @apply bg-[var(--destructive)];
+}
+.bg-destructive-foreground {
+  @apply bg-[var(--destructive-foreground)];
 }
 
 /* Border colors */

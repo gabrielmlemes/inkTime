@@ -53,9 +53,12 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <Button
           size="icon"
           variant="secondary"
-          className={clsx('mt-6 cursor-pointer flex items-center justify-center ml-auto', {
-            'ml-0 mx-auto': isCollapsed,
-          })}
+          className={clsx(
+            'mt-6 cursor-pointer flex items-center justify-center ml-auto text-primary',
+            {
+              'ml-0 mx-auto': isCollapsed,
+            }
+          )}
           onClick={() => setisCollapsed(!isCollapsed)}
         >
           {isCollapsed ? <ChevronRight className="size-6" /> : <ChevronLeft className="size-6" />}

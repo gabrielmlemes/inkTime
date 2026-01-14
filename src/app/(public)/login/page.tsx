@@ -6,7 +6,7 @@ import getServerSession from '@/lib/get-server-session';
 import { SignInForm } from './_components/sign-in-form';
 
 export const metadata: Metadata = {
-  title: 'InkPRO - Login',
+  title: 'Inkore - Login',
   description: 'Faça seu login para acessar a plataforma.',
 };
 

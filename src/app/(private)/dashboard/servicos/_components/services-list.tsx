@@ -76,7 +76,7 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
 
             {permissions.hasPermission && (
               <DialogTrigger asChild>
-                <Button variant="default" className="ml-auto">
+                <Button variant="outline" className="ml-auto">
                   <PlusIcon className="size-4" />
                 </Button>
               </DialogTrigger>
@@ -135,7 +135,7 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
                       className="flex items-center justify-between gap-2 border-b pb-3"
                     >
                       <div className="flex gap-2 items-center">
-                        <h3 className="font-semibold text-lg">{service.name}</h3>
+                        <p className="font-semibold text-lg">{service.name}</p>
                         <span className="text-gray-500">–</span>
                         <span className="text-lg">{formatCurrency(service.price)}</span>
 
@@ -161,7 +161,10 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
                           Editar
                           <PencilIcon className="size-4" />
                         </Button>
-                        <Button onClick={() => handleDeleteService({ serviceId: service.id })}>
+                        <Button
+                          onClick={() => handleDeleteService({ serviceId: service.id })}
+                          variant="destructive"
+                        >
                           Excluir
                           <TrashIcon className="size-4" />
                         </Button>

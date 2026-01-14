@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'InkPRO',
+  title: 'Inkore',
   description: 'A sua plataforma de agendamentos online.',
   icons: {
     icon: '/favicon.svg',

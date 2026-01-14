@@ -31,7 +31,7 @@ export function DeleteReminderButton({ id }: { id: string }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <Button onClick={handleDeleteReminder} disabled={isPending}>
+        <Button onClick={handleDeleteReminder} disabled={isPending} variant="destructive">
           {isPending ? (
             <Loader2 className="h-4 w-4 animate-spin" />
           ) : (

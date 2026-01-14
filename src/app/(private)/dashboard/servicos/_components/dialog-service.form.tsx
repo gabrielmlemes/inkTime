@@ -165,7 +165,7 @@ export function DialogServiceForm({
             )}
           />
 
-          <p className="font-semibold">Tempo de duração do serviço</p>
+          <p className="font-semibold">Tempo médio de duração do serviço</p>
 
           <div className="grid grid-cols-2 gap-4">
             <FormField

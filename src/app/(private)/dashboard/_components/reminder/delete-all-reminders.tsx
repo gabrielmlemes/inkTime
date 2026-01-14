@@ -32,7 +32,7 @@ export function DeleteAllReminders() {
       <DialogTrigger asChild>
         <Tooltip>
           <TooltipTrigger>
-            <Button size="icon" onClick={() => setModalOpen(true)}>
+            <Button onClick={() => setModalOpen(true)} variant="destructive">
               <Trash2 />
             </Button>
           </TooltipTrigger>

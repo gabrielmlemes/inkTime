@@ -1,5 +1,3 @@
-import { redirect } from 'next/navigation';
-
 import { SubscriptionLabel } from '@/components/ui/subscription-label';
 import { TrialLabel } from '@/components/ui/trial-label';
 import getServerSession from '@/lib/get-server-session';
@@ -23,7 +21,6 @@ export async function ServiceContent({ userId }: ServiceContentProps) {
   const services = await getServices({ userId });
   const permissions = await hasPermission({ type: 'service' });
   const subscription = await checkSubscription({ userId: session.user.id });
-  // console.log('permissões: ', permissions);
 
   return (
     <>

@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -28,6 +29,21 @@ const faqs = [
 ];
 
 export const FAQSection = () => {
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   return (
     <section className="bg-background py-24 sm:py-32">
       <div className="mx-auto max-w-4xl px-6 lg:px-8">
@@ -39,22 +55,27 @@ export const FAQSection = () => {
             Respostas rápidas para suas dúvidas mais importantes.
           </p>
         </div>
-        <div className="mt-16 space-y-4">
+        <motion.div
+          className="mt-16 space-y-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {faqs.map((faq, index) => (
-            <Collapsible
-              key={index}
-              className="rounded-lg border border-border bg-secondary/20 px-6"
-            >
-              <CollapsibleTrigger className="flex w-full items-center justify-between text-left py-4">
-                <span className="text-base font-semibold text-foreground">{faq.question}</span>
-                <ChevronDown className="h-5 w-5 transition-transform data-[state=open]:rotate-180" />
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <p className="pb-4 text-base text-muted-foreground/80">{faq.answer}</p>
-              </CollapsibleContent>
-            </Collapsible>
+            <motion.div key={index} variants={itemVariants}>
+              <Collapsible className="rounded-lg border border-border bg-secondary/20 px-6">
+                <CollapsibleTrigger className="flex w-full items-center justify-between text-left py-4">
+                  <span className="text-base font-semibold text-foreground">{faq.question}</span>
+                  <ChevronDown className="h-5 w-5 transition-transform data-[state=open]:rotate-180" />
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <p className="pb-4 text-base text-muted-foreground/80">{faq.answer}</p>
+                </CollapsibleContent>
+              </Collapsible>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
