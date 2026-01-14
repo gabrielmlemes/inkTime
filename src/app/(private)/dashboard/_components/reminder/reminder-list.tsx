@@ -12,9 +12,9 @@ interface RemindersListProps {
 
 export function RemindersList({ reminder }: RemindersListProps) {
   return (
-    <div className="flex items-start justify-between gap-4 bg-yellow-100 p-2 rounded-lg">
-      <div className="flex-1 min-w-0">
-        <p className="text-sm text-secondary-foreground whitespace-pre-wrap wrap-break-word">
+    <div className="flex items-center justify-between gap-4 bg-yellow-100 p-2 rounded-lg">
+      <div className="flex-1 min-w-0 items-center">
+        <p className="text-sm text-secondary whitespace-pre-wrap wrap-break-word">
           <span className="mr-2">•</span>
           {reminder.description}
         </p>

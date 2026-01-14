@@ -21,7 +21,7 @@ export async function Reminders({ userId }: Readonly<{ userId: string }>) {
         </CardTitle>
 
         <div className="flex items-center gap-3">
-          <DeleteAllReminders />
+          {reminders.length > 0 && <DeleteAllReminders />}
 
           <Tooltip>
             <TooltipTrigger>

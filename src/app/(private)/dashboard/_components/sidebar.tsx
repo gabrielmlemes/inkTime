@@ -52,7 +52,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         {/* Open/Close sidebar button */}
         <Button
           size="icon"
-          variant="default"
+          variant="secondary"
           className={clsx('mt-6 cursor-pointer flex items-center justify-center ml-auto', {
             'ml-0 mx-auto': isCollapsed,
           })}
@@ -124,7 +124,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <Collapsible open={!isCollapsed} className="mt-6 flex-grow">
           <CollapsibleContent className="flex h-full flex-col">
             <nav className="flex flex-col gap-4 text-sm">
-              <span className="text-muted-foreground text-xs">PAINEL</span>
+              <span className="text-muted text-xs">PAINEL</span>
 
               <SidebarLink
                 href="/dashboard"
@@ -142,7 +142,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
                 isCollapsed={isCollapsed}
               />
 
-              <span className="text-muted-foreground text-xs mt-4">CONFIGURAÇÕES</span>
+              <span className="text-muted text-xs mt-4">CONFIGURAÇÕES</span>
 
               <SidebarLink
                 href="/dashboard/perfil"
@@ -163,7 +163,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 
             <div className="mt-auto flex flex-col gap-4 items-center">
               <Divider />
-              <Button onClick={handleSignOut} className="w-full">
+              <Button onClick={handleSignOut} className="w-full" variant="secondary">
                 Sair
               </Button>
             </div>
