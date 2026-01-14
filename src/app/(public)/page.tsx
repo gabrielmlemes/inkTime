@@ -1,26 +1,41 @@
 import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'InkPRO',
-  description: 'Gerencie seu estúdio',
-};
-
 import Footer from '@/components/footer';
 
 import Header from './_components/header/header';
-import Hero from './_components/hero/hero';
-import Professionals from './_components/hero/professionals';
+import { FAQSection } from './_components/landing/FAQSection';
+import { FeaturesSection } from './_components/landing/FeaturesSection';
+import { FinalCTASection } from './_components/landing/FinalCTASection';
+import { HeroSection } from './_components/landing/HeroSection';
+import { HowItWorksSection } from './_components/landing/HowItWorksSection';
+import { PricingSection } from './_components/landing/PricingSection';
+import { SocialProofSection } from './_components/landing/SocialProofSection';
+
+export const metadata: Metadata = {
+  title: 'Inkore - A plataforma completa para seu estúdio de tatuagem',
+  description: 'Agendamentos inteligentes para estúdios de tatuagem',
+};
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
-      <Hero />
-
-      <div id="professionals">
-        <Professionals />
-      </div>
+      <main>
+        <HeroSection />
+        {/* <SocialProofSection /> */}
+        <div id="recursos">
+          <FeaturesSection />
+        </div>
+        <HowItWorksSection />
+        <div id="precos">
+          <PricingSection />
+        </div>
+        <div id="faq">
+          <FAQSection />
+        </div>
+        <FinalCTASection />
+      </main>
 
       <Footer />
     </div>

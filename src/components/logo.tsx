@@ -12,7 +12,9 @@ const Logo = ({ href }: LogoProps) => {
     <>
       <Link href={href} className="font-bold text-3xl">
         <div className="flex items-center space-x-2 text-slate-100">
-          Ink<span className="text-primary">PRO</span>
+          <span className="bg-gradient-to-r from-red-500 via-red-600 to-red-800 bg-clip-text text-transparent">
+            Inkore
+          </span>
           <Image src={TattooIcon} alt="Logo InkPRO" width={30} height={30} />
         </div>
       </Link>
