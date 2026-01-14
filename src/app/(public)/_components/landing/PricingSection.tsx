@@ -1,4 +1,4 @@
-import { Check, X } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
@@ -26,11 +26,12 @@ const plans = [
     pricePeriod: '/mês',
     description: 'Para estúdios que buscam crescimento e máximo controle.',
     features: [
-      'Tudo do plano BASIC, e mais:',
+      'Página de agendamento online',
+      'Agenda unificada',
       'Serviços ilimitados',
+      'Lembretes de agendamento',
       'Suporte prioritário',
       'Gestão de múltiplos tatuadores (em breve)',
-      'Relatórios e análises (em breve)',
     ],
     isRecommended: true,
     cta: 'Teste o PROFESSIONAL',
@@ -40,15 +41,15 @@ const plans = [
 
 export const PricingSection = () => {
   return (
-    <section className="bg-muted/30 py-20 sm:py-32">
+    <section className="bg-secondary/10 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-base font-semibold leading-7 text-primary">Preços</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Escolha o plano perfeito para o seu estúdio
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="font-semibold leading-7 text-primary">Preços</p>
+          <h2 className="mt-2 text-4xl sm:text-5xl font-medium tracking-tight text-foreground">
+            Um plano para cada fase do seu estúdio
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Comece de graça e evolua conforme seu negócio cresce. Sem burocracia.
+            Preços transparentes e um plano para cada etapa do seu crescimento. Sem surpresas.
           </p>
         </div>
         <div className="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
@@ -56,11 +57,22 @@ export const PricingSection = () => {
             <div
               key={plan.name}
               className={cn(
-                'rounded-3xl p-8 ring-1 ring-border xl:p-10',
-                plan.isRecommended ? 'bg-background ring-2 ring-primary' : 'bg-background/50'
+                'relative rounded-3xl p-8 ring-1 ring-border xl:p-10',
+                plan.isRecommended
+                  ? 'bg-background ring-2 ring-primary shadow-xl shadow-gray-800'
+                  : 'bg-background/50'
               )}
             >
-              <h3 className="text-lg font-semibold leading-8 text-foreground">{plan.name}</h3>
+              {plan.isRecommended && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform ">
+                  <div className="rounded-full bg-primary px-4 py-1 text-sm font-semibold text-primary-foreground">
+                    Mais Popular
+                  </div>
+                </div>
+              )}
+              <h3 className="text-lg font-semibold uppercase tracking-wider leading-8 text-foreground">
+                {plan.name}
+              </h3>
               <p className="mt-4 text-sm leading-6 text-muted-foreground">{plan.description}</p>
               <p className="mt-6 flex items-baseline gap-x-1">
                 <span className="text-4xl font-bold tracking-tight text-foreground">
@@ -73,6 +85,7 @@ export const PricingSection = () => {
               <Button
                 asChild
                 className="w-full mt-6"
+                size="lg"
                 variant={plan.isRecommended ? 'default' : 'outline'}
               >
                 <Link href={plan.href}>{plan.cta}</Link>
@@ -80,7 +93,7 @@ export const PricingSection = () => {
               <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-muted-foreground">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex gap-x-3">
-                    <Check className="h-6 w-5 flex-none text-green-500" aria-hidden="true" />
+                    <Check className="h-6 w-5 flex-none text-primary" aria-hidden="true" />
                     {feature}
                   </li>
                 ))}

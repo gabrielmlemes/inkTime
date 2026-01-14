@@ -1,3 +1,4 @@
+import { LogInIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import Logo from '@/components/logo';
@@ -26,7 +27,11 @@ const Header = () => {
 
         <div className="hidden md:flex items-center gap-4">
           <Button asChild>
-            <Link href="/login">Login</Link>
+            <Link href="/login">
+              <span className="sr-only">Login</span>
+              Acessar plataforma
+              <LogInIcon />
+            </Link>
           </Button>
         </div>
 
