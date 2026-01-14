@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import TattooIcon from '@/assets/tattoo-svgrepo-com.svg';
+import TattooIcon from '@/assets/tattoo-svgrepo-com-white.svg';
 
 interface LogoProps {
   href: string;
 }
 
-const Logo = ({ href }: LogoProps) => {
+const WhiteLogo = ({ href }: LogoProps) => {
   return (
     <>
       <Link href={href} className="font-bold text-3xl">
@@ -19,4 +19,4 @@ const Logo = ({ href }: LogoProps) => {
   );
 };
 
-export default Logo;
+export default WhiteLogo;

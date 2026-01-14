@@ -13,11 +13,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 
-import Logo from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
 import { Divider } from '@/components/ui/divider';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import WhiteLogo from '@/components/white-logo';
 
 import MobileDashboardSidebar from './mobile-sidebar';
 import SidebarLink from './sidebar-links';
@@ -47,7 +47,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
           }
         )}
       >
-        <div className="mx-auto max-w-full">{!isCollapsed && <Logo href="/dashboard" />}</div>
+        <div className="mx-auto max-w-full">{!isCollapsed && <WhiteLogo href="/dashboard" />}</div>
 
         {/* Open/Close sidebar button */}
         <Button

@@ -18,7 +18,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-center md:flex-row md:space-x-4 space-y-2 md:space-y-0">
             <Logo href="#" />
             <p className="text-sm leading-5 text-muted-foreground">
-              &copy; {new Date().getFullYear()} Inktime. Todos os direitos reservados.
+              &copy; {new Date().getFullYear()} Inkore. Todos os direitos reservados.
             </p>
             <div className="flex space-x-4 text-sm leading-5">
               <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">

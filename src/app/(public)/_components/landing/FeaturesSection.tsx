@@ -37,7 +37,7 @@ export const FeaturesSection = () => {
             Uma plataforma feita para o seu estúdio crescer
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Concentre-se na sua arte. Deixe que o Inktime cuide da organização e dos agendamentos
+            Concentre-se na sua arte. Deixe que o Inkore cuide da organização e dos agendamentos
             para você.
           </p>
         </div>

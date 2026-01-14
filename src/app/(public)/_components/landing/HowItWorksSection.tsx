@@ -30,7 +30,7 @@ export const HowItWorksSection = () => {
             Tudo pronto para decolar em 3 passos
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Começar a usar o Inktime é um processo rápido, simples e intuitivo.
+            Começar a usar o Inkore é um processo rápido, simples e intuitivo.
           </p>
         </div>
         <div className="relative mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">

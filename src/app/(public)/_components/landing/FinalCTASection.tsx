@@ -33,7 +33,7 @@ export const FinalCTASection = () => {
 
           <Image
             src={DashboardImage}
-            alt="Imagem do dashboard da plataforma Inktime ao fundo"
+            alt="Imagem do dashboard da plataforma Inkore ao fundo"
             fill
             className="absolute inset-0 -z-10 h-full w-full object-cover opacity-[0.03] transform-gpu scale-125 -rotate-6"
           />
