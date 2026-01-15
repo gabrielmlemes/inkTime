@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-const plans = [
+export const plans = [
   {
     name: 'BASIC',
     price: 'R$ 27,90',
@@ -16,8 +16,8 @@ const plans = [
     features: [
       'Página de agendamento online',
       'Agenda unificada',
-      'Até 3 serviços cadastrados',
       'Lembretes de agendamento',
+      'Até 3 serviços cadastrados',
     ],
     isRecommended: false,
     cta: 'Começar com o BASIC',
@@ -25,14 +25,14 @@ const plans = [
   },
   {
     name: 'PROFESSIONAL',
-    price: 'R$ 97,90',
+    price: 'R$ 59,90',
     pricePeriod: '/mês',
     description: 'Para estúdios que buscam crescimento e máximo controle.',
     features: [
       'Página de agendamento online',
       'Agenda unificada',
-      'Serviços ilimitados',
       'Lembretes de agendamento',
+      'Serviços ilimitados',
       'Suporte prioritário',
       'Gestão de múltiplos tatuadores (em breve)',
     ],

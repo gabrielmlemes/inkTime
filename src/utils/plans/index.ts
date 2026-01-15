@@ -30,7 +30,7 @@ export const subscriptionPlans = [
     name: 'Professional',
     description: 'Ideal para estúdios grandes',
     oldPrice: 'R$ 297,90',
-    price: 'R$ 97,90',
+    price: 'R$ 59,90',
     features: [
       `Até ${PLANS.PROFESSIONAL.maxServices} serviços`,
       'Agendamentos ilimitados',

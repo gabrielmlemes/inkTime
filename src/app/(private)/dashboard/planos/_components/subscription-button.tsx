@@ -34,8 +34,8 @@ export function SubscriptionButton({ type }: SubscriptionButtonProps) {
       variant="outline"
       className={cn(
         'w-full font-bold',
-        type === 'BASIC' && 'bg-indigo-500 hover:bg-indigo-4',
-        type === 'PROFESSIONAL' && 'bg-emerald-500 hover:bg-emerald-4'
+        type === 'BASIC' && 'border border-border',
+        type === 'PROFESSIONAL' && 'bg-primary text-accent-foreground'
       )}
       onClick={handleCreateBilling}
     >

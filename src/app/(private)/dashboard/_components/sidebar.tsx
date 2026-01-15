@@ -39,7 +39,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       {/* Desktop sidebar */}
       <aside
         className={clsx(
-          'flex flex-col border-r border-gray-800 transition-all duration-300 p-4 min-h-full overflow-hidden',
+          'flex flex-col border-r bg-[#27272a]/15 border-gray-800 transition-all duration-300 p-4 min-h-full overflow-hidden',
           {
             'w-20': isCollapsed,
             'w-64': !isCollapsed,
@@ -50,29 +50,39 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <div className="mx-auto max-w-full">{!isCollapsed && <WhiteLogo href="/dashboard" />}</div>
 
         {/* Open/Close sidebar button */}
-        <Button
-          size="icon"
-          variant="secondary"
-          className={clsx(
-            'mt-6 cursor-pointer flex items-center justify-center ml-auto text-primary',
-            {
-              'ml-0 mx-auto': isCollapsed,
-            }
-          )}
-          onClick={() => setisCollapsed(!isCollapsed)}
-        >
-          {isCollapsed ? <ChevronRight className="size-6" /> : <ChevronLeft className="size-6" />}
-        </Button>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              size="icon"
+              variant="secondary"
+              className={clsx(
+                'mt-6 cursor-pointer flex items-center justify-center ml-auto text-muted',
+                {
+                  'ml-0 mx-auto': isCollapsed,
+                }
+              )}
+              onClick={() => setisCollapsed(!isCollapsed)}
+            >
+              {isCollapsed ? (
+                <ChevronRight className="size-6" />
+              ) : (
+                <ChevronLeft className="size-6" />
+              )}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="right">{isCollapsed ? 'Abrir' : 'Fechar'}</TooltipContent>
+        </Tooltip>
 
         {/* Desktop Sidebar closed */}
         {isCollapsed && (
-          <nav className="mt-6 flex flex-col gap-4">
+          <nav className="mt-12 flex flex-col gap-4">
             <Tooltip>
               <TooltipTrigger>
                 <SidebarLink
                   href="/dashboard"
                   label="Agendamentos"
-                  icon={<CalendarCheck2 className="w-6 h-6 text-muted-foreground" />}
+                  icon={<CalendarCheck2 className="w-6 h-6 text-primary" />}
                   pathname={pathname}
                   isCollapsed={isCollapsed}
                 />
@@ -85,7 +95,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
                 <SidebarLink
                   href="/dashboard/servicos"
                   label="Serviços"
-                  icon={<Folder className="w-6 h-6 text-muted-foreground" />}
+                  icon={<Folder className="w-6 h-6 text-primary" />}
                   pathname={pathname}
                   isCollapsed={isCollapsed}
                 />
@@ -100,7 +110,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
                 <SidebarLink
                   href="/dashboard/perfil"
                   label="Meu perfil"
-                  icon={<Settings className="w-6 h-6 text-muted-foreground" />}
+                  icon={<Settings className="w-6 h-6 text-primary" />}
                   pathname={pathname}
                   isCollapsed={isCollapsed}
                 />
@@ -113,7 +123,7 @@ const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
                 <SidebarLink
                   href="/dashboard/planos"
                   label="Planos"
-                  icon={<Banknote className="w-6 h-6 text-muted-foreground" />}
+                  icon={<Banknote className="w-6 h-6 text-primary" />}
                   pathname={pathname}
                   isCollapsed={isCollapsed}
                 />

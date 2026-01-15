@@ -20,7 +20,7 @@ export function SignInForm() {
 
   return (
     <div className="w-full max-w-sm mx-auto">
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 space-y-3">
         <h1 className="text-2xl font-bold text-secondary">Acesse sua conta</h1>
         <p className="text-gray-500">Use sua conta do Google para acessar a plataforma Inkore</p>
       </div>
