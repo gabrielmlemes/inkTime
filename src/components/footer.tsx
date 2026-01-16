@@ -4,36 +4,79 @@ import Logo from '../components/logo';
 
 const Footer = () => {
   return (
-    <footer className="bg-background border-t border-border/50">
-      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-8">
-        <div className="flex flex-col items-center justify-center md:flex-row md:space-y-0 space-y-4">
-          {/* Logo, Copyright & Legal Links */}
-          <div className="flex flex-col items-center md:items-center md:flex-row md:space-x-4 space-y-2 md:space-y-0">
-            <Logo href="#" />
-            <p className="text-sm leading-5 text-center text-muted-foreground">
+    <footer className="bg-background border-t border-border/50 text-muted-foreground">
+      <div className="container mx-auto max-w-7xl px-6 py-12 lg:px-8">
+        {/* Seção de Colunas */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mx-auto md:text-center">
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-foreground">Produto</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/#features" className="hover:text-primary transition-colors">
+                  Funcionalidades
+                </Link>
+              </li>
+              <li>
+                <Link href="/#pricing" className="hover:text-primary transition-colors">
+                  Preços
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Coluna Legal */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-foreground">Legal</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/politicas-de-privacidade"
+                  className="hover:text-primary transition-colors"
+                >
+                  Política de Privacidade
+                </Link>
+              </li>
+              <li>
+                <Link href="/termos-de-servico" className="hover:text-primary transition-colors">
+                  Termos de Serviço
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Coluna Contato/Redes Sociais */}
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold text-foreground">Contato</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="mailto:contato@inkore.com.br"
+                  className="hover:text-primary transition-colors"
+                >
+                  contato@inkore.com.br
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Seção Inferior */}
+        <div className="mt-12 pt-8 border-t border-border/50 md:flex md:items-center md:justify-center">
+          <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center md:space-x-4 items-center justify-center">
+            <Logo href="/" />
+            <p className="text-sm text-center md:text-left">
               &copy; {new Date().getFullYear()} Inkore. Todos os direitos reservados.
             </p>
-
-            <div className="flex space-x-4 text-sm leading-5 text-center items-center">
+            <div className="flex justify-center md:justify-start gap-1">
+              <p className="text-sm text-center">Desenvolvido por</p>
               <Link
-                href="#"
-                className="text-muted-foreground flex-1 hover:text-primary transition-colors"
+                href="https://gabrielmlemes.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
               >
-                Política de Privacidade
+                @Gabriel Lemes
               </Link>
-              <Link
-                href="#"
-                className="text-muted-foreground flex-1 hover:text-primary transition-colors"
-              >
-                Termos de Serviço
-              </Link>
-
-              <div className="flex flex-col items-center md:flex-row md:gap-1">
-                <p className="text-sm leading-5  text-center text-muted-foreground">
-                  Desenvolvido por
-                </p>
-                <Link href="https://gabrielmlemes.vercel.app/"> @Gabriel Lemes</Link>
-              </div>
             </div>
           </div>
         </div>
