@@ -28,30 +28,43 @@ export function isSlotInThePast(time: string) {
   return false;
 }
 
-/**
- * Verifica se a partir de um slot inicial existe uma sequência de "requiredSlots" disponíveis. Isso é importante para que um cliente não realize um agendamento que ultrapasse por outro agendamento de outro cliente.
- * Exemplo: Se um serviço tem 2 requireds slots e começa em 15:00,
- * precisa garantir que 15:00 e 15:30 não estejam no blockedSlots.
- */
 export function isSlotSequenceAvailable(
-  startSlot: string, // Primeiro horário disponível
-  requiredSlots: number, // Quantidade de slots necessários
-  allSlots: string[], // Todos os horários do estúdio
-  blockedSlots: string[] // Horários bloqueados
+  startSlot: string,
+  requiredSlots: number,
+  allSlots: string[],
+  blockedSlots: string[]
 ) {
-  const startIndex = allSlots.indexOf(startSlot);
-  const allSlotsLength = allSlots.length - 1;
-
-  // Regra que bloqueia o agendamento que ultrapassa do horário do expediente (fica a critério do cliente – opcional)
-  if (startIndex === -1 || startIndex + requiredSlots > allSlotsLength) {
+  if (allSlots.length === 0) {
     return false;
   }
 
-  // Regra que bloqueia o agendamento que "fura" um horário de agendamento já existente
-  for (let i = startIndex; i < startIndex + requiredSlots; i++) {
-    const slotTime = allSlots[i];
+  // 1. Verificação de Limite de Expediente
+  const [startHour, startMinute] = startSlot.split(':').map(Number);
+  const serviceDurationInMinutes = requiredSlots * 30;
+  const endServiceMinute = startMinute + serviceDurationInMinutes;
 
-    if (blockedSlots.includes(slotTime)) {
+  const endServiceHour = startHour + Math.floor(endServiceMinute / 60);
+  const endServiceFinalMinute = endServiceMinute % 60;
+
+  const lastSlot = allSlots[allSlots.length - 1];
+  const [lastSlotHour, lastSlotMinute] = lastSlot.split(':').map(Number);
+
+  if (
+    endServiceHour > lastSlotHour ||
+    (endServiceHour === lastSlotHour && endServiceFinalMinute > lastSlotMinute)
+  ) {
+    return false;
+  }
+
+  // 2. Verificação de Continuidade (Almoço, etc.)
+  for (let i = 0; i < requiredSlots; i++) {
+    const currentMinute = startMinute + i * 30;
+    const hour = startHour + Math.floor(currentMinute / 60);
+    const minute = currentMinute % 60;
+
+    const currentSlot = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+
+    if (!allSlots.includes(currentSlot) || blockedSlots.includes(currentSlot)) {
       return false;
     }
   }

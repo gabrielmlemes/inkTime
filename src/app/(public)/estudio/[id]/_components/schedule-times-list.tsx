@@ -47,7 +47,7 @@ export function ScheduleTimesList({
             variant="outline"
             className={cn(
               'select-none',
-              selectedTime === availableTimesSlot.time && 'border-2 border-red-500',
+              selectedTime === availableTimesSlot.time && 'border-2 border-primary',
               !slotEnabled && 'opacity-50 cursor-not-allowed'
             )}
             onClick={() => slotEnabled && onTimeSelect(availableTimesSlot.time)}
