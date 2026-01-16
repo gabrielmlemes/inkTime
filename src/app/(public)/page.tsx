@@ -9,7 +9,6 @@ import { FinalCTASection } from './_components/landing/FinalCTASection';
 import { HeroSection } from './_components/landing/HeroSection';
 import { HowItWorksSection } from './_components/landing/HowItWorksSection';
 import { PricingSection } from './_components/landing/PricingSection';
-import { SocialProofSection } from './_components/landing/SocialProofSection';
 
 export const metadata: Metadata = {
   title: 'Inkore - A plataforma completa para seu estúdio de tatuagem',

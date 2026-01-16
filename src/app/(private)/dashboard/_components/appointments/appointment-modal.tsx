@@ -1,7 +1,5 @@
 'use client';
 
-import { format } from 'date-fns';
-
 import { DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { formatCurrency } from '@/helpers/format-currency';
@@ -13,8 +11,6 @@ interface AppointmentModalProps {
 }
 
 export function AppointmentModal({ appointment }: AppointmentModalProps) {
-  const status = appointment.status === 'scheduled' ? 'Agendado' : 'Não realizado';
-
   return (
     <DialogContent>
       <DialogHeader>

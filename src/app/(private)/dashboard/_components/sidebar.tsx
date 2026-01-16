@@ -23,7 +23,7 @@ import MobileDashboardSidebar from './mobile-sidebar';
 import SidebarLink from './sidebar-links';
 
 const Sidebar = ({ children }: Readonly<{ children: React.ReactNode }>) => {
-  const { data: session, status, update } = useSession();
+  const { data: session, update } = useSession();
   const router = useRouter();
   const pathname = usePathname();
   const [isCollapsed, setisCollapsed] = useState(false); // jogar pro zustand

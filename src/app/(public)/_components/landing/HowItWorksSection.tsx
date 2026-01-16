@@ -1,7 +1,6 @@
-'use client'; // Ensure this is at the top if not already present
+'use client';
 
-import { motion } from 'framer-motion'; // Import motion
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const steps = [
   {

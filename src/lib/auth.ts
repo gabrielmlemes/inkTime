@@ -30,7 +30,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
   providers: [GitHub, Google],
   callbacks: {
-    async session({ session, user }) {
+    async session({ session }) {
       const userFromDb = await prisma.user.findUnique({
         where: { email: session.user.email as string },
       });

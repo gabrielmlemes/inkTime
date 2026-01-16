@@ -62,13 +62,14 @@ const Footer = () => {
 
         {/* Seção Inferior */}
         <div className="mt-12 pt-8 border-t border-border/50 md:flex md:items-center md:justify-center">
-          <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center md:space-x-4 items-center justify-center">
+          <div className="flex flex-col gap-2 items-center justify-center">
             <Logo href="/" />
             <p className="text-sm text-center md:text-left">
               &copy; {new Date().getFullYear()} Inkore. Todos os direitos reservados.
             </p>
-            <div className="flex justify-center md:justify-start gap-1">
-              <p className="text-sm text-center">Desenvolvido por</p>
+
+            <div className="flex justify-center md:justify-start gap-1 italic text-xs">
+              <p className="text-center">Desenvolvido por</p>
               <Link
                 href="https://gabrielmlemes.vercel.app/"
                 target="_blank"

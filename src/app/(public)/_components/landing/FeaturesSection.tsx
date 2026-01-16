@@ -1,7 +1,7 @@
 'use client'; // Ensure this is at the top if not already present
 
 import { motion } from 'framer-motion'; // Import motion
-import { AppWindow, Bell, CalendarDays, LayoutGrid, Sparkles, Users } from 'lucide-react';
+import { AppWindow, Bell, CalendarDays, LayoutGrid } from 'lucide-react';
 
 const features = [
   {
@@ -55,7 +55,7 @@ export const FeaturesSection = () => {
             Uma plataforma feita para o seu estúdio crescer
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Concentre-se na sua arte. Deixe que o Inkore cuide da organização e dos agendamentos
+            Concentre-se na sua arte. Deixe que a Inkore cuide da organização e dos agendamentos
             para você.
           </p>
         </div>

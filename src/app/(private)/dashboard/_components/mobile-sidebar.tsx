@@ -20,7 +20,6 @@ export default function MobileDashboardSidebar({
   pathname,
   isCollapsed,
   setIsCollapsed,
-  session,
 }: MobileDashboardSidebarProps) {
   const { update } = useSession();
 
