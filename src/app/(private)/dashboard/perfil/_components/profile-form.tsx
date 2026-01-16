@@ -200,7 +200,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                       <DialogHeader>
                         <DialogTitle>Horários do estúdio</DialogTitle>
                         <DialogDescription>
-                          Selecione abaixo os horários disponíveis para agendamentos
+                          Selecione abaixo os horários de funcionamento do estúdio
                         </DialogDescription>
                       </DialogHeader>
 
@@ -220,6 +220,10 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                           </Button>
                         ))}
                       </section>
+
+                      <p className="text-sm text-muted text-center italic">
+                        Os horários não selecionados serão desconsiderados para agendamentos.
+                      </p>
                     </DialogContent>
                   </Dialog>
                 </div>
