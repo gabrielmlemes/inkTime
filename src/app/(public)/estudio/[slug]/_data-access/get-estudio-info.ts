@@ -1,14 +1,14 @@
 import prisma from '@/lib/prisma';
 
-export async function getStudioInfo({ userId }: { userId: string }) {
+export async function getStudioInfo({ slug }: { slug: string }) {
   try {
-    if (!userId) {
+    if (!slug) {
       return null;
     }
 
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: {
-        id: userId,
+        slug: slug,
       },
       include: {
         subscription: true,

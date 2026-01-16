@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   description: 'Agendamento facilitado para você!',
 };
 
-export default async function SchedulePage({ params }: { params: Promise<{ id: string }> }) {
-  const estudioId = (await params).id;
+export default async function SchedulePage({ params }: { params: { slug: string } }) {
+  const slug = params.slug;
 
-  const user = await getStudioInfo({ userId: estudioId });
+  const user = await getStudioInfo({ slug: slug });
 
   if (!user) {
     redirect('/');

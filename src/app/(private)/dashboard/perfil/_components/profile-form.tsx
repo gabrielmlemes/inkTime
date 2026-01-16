@@ -113,7 +113,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                     <FormItem>
                       <FormLabel className="font-bold">Nome do estúdio:</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite o nome do estúdio" {...field} />
+                        <Input placeholder="Digite o nome do estúdio" {...field} required />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -127,7 +127,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                     <FormItem>
                       <FormLabel className="font-bold">Endereço do estúdio:</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite o endereço do estúdio" {...field} />
+                        <Input placeholder="Digite o endereço do estúdio" {...field} required />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -148,6 +148,7 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                             const formattedPhone = formatPhone(e.target.value);
                             field.onChange(formattedPhone);
                           }}
+                          required
                         />
                       </FormControl>
                       <FormMessage />
