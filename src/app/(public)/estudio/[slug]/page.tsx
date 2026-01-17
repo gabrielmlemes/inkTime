@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: 'Agendamento facilitado para você!',
 };
 
-export default async function SchedulePage({ params }: { params: { slug: string } }) {
-  const slug = params.slug;
+export default async function SchedulePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
 
   const user = await getStudioInfo({ slug: slug });
 
