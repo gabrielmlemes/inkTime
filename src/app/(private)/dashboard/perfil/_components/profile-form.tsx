@@ -97,7 +97,9 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Card>
             <CardHeader>
-              <CardTitle>Meu perfil</CardTitle>
+              <CardTitle className="text-xl font-semibold uppercase tracking-wider leading-8 text-foreground">
+                Meu perfil
+              </CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-6">

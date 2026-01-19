@@ -6,7 +6,7 @@ import Header from './_components/header/header';
 import { FAQSection } from './_components/landing/FAQSection';
 import { FeaturesSection } from './_components/landing/FeaturesSection';
 import { FinalCTASection } from './_components/landing/FinalCTASection';
-import { HeroSection } from './_components/landing/HeroSection';
+import { HeroParallaxSection } from './_components/landing/HeroParallax';
 import { HowItWorksSection } from './_components/landing/HowItWorksSection';
 import { PricingSection } from './_components/landing/PricingSection';
 
@@ -21,7 +21,7 @@ export default function Home() {
       <Header />
 
       <main>
-        <HeroSection />
+        <HeroParallaxSection />
         {/* <SocialProofSection /> */}
         <div id="recursos">
           <FeaturesSection />

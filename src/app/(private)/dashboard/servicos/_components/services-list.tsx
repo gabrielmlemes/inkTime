@@ -72,7 +72,9 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
       <section className="mx-auto">
         <Card>
           <CardHeader className="flex items-center">
-            <CardTitle className="text-xl md:text-3xl font-bold">Serviços</CardTitle>
+            <CardTitle className="text-xl font-semibold uppercase tracking-wider leading-8 text-foreground">
+              Serviços
+            </CardTitle>
 
             {permissions.hasPermission && (
               <DialogTrigger asChild>
@@ -135,19 +137,17 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
                       className="flex items-center justify-between gap-2 border-b pb-3"
                     >
                       <div className="flex gap-2 items-center">
-                        <p className="font-semibold text-lg">{service.name}</p>
-                        <span className="text-gray-500">–</span>
-                        <span className="text-lg">{formatCurrency(service.price)}</span>
+                        <p className="font-semibold text-md">{service.name}</p>
+                        <span className="text-gray-500">•</span>
+                        <h4 className="text-sm ">{formatCurrency(service.price)}</h4>
 
-                        <span className="text-lg">
+                        <span className="text-sm ">
                           {service.duration ? (
                             <div className="flex items-center gap-2">
-                              <span className="text-gray-500">–</span>
-                              <div>
-                                <span className="text-lg">
-                                  {Math.floor(service.duration / 60)}h
-                                </span>
-                                <span className="text-lg"> {service.duration % 60}min</span>
+                              <span className="text-gray-500">•</span>
+                              <div className="flex items-center gap-1">
+                                <h5>{Math.floor(service.duration / 60)}h</h5>
+                                <h5 className="text-sm"> {service.duration % 60}min</h5>
                               </div>
                             </div>
                           ) : (
