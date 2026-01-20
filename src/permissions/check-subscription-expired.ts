@@ -8,9 +8,19 @@ import { TRIAL_DAYS } from '@/constants/trial-limit-days';
 import { ResultPermissionProps } from './has-permission';
 
 export async function checkSubscriptionExpired(session: Session): Promise<ResultPermissionProps> {
-  const trialEndDate = addDays(session?.user?.createdAt, TRIAL_DAYS); // Acrescenta 7 dias a partir da data de criação do usuário
+  // 1. Verifica se existe uma assinatura ativa
+  if (session.user.subscription?.status === 'active') {
+    return {
+      hasPermission: true,
+      planId: session.user.subscription.plan,
+      expired: false,
+      plan: session.user.subscription,
+    };
+  }
 
-  // Compara a data do dia de hoje com a data passada no segundo argumento (trialEndDate). E VERIFICA SE JÁ PASSOU!
+  // 2. Se não houver assinatura ativa, verifica o período de trial
+  const trialEndDate = addDays(new Date(session.user.createdAt), TRIAL_DAYS);
+
   if (isAfter(new Date(), trialEndDate)) {
     return {
       hasPermission: false,
@@ -20,7 +30,7 @@ export async function checkSubscriptionExpired(session: Session): Promise<Result
     };
   }
 
-  // Se passou do if, é porque a data de TRIAL ainda não passou, então o cliente ainda pode acessar tudo.
+  // 3. Se não expirou, o usuário está em trial
   return {
     hasPermission: true,
     planId: 'TRIAL',

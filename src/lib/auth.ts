@@ -33,11 +33,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session }) {
       const userFromDb = await prisma.user.findUnique({
         where: { email: session.user.email as string },
+        include: {
+          subscription: true,
+        },
       });
 
       if (userFromDb) {
         session.user.id = userFromDb.id;
         session.user.slug = userFromDb.slug;
+        session.user.subscription = userFromDb.subscription;
       }
 
       return session;

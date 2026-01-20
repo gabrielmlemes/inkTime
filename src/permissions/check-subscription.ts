@@ -60,7 +60,9 @@ export async function checkSubscription({ userId }: { userId: string }) {
 
   return {
     subscriptionStatus: 'TRIAL',
-    message: `Você está no período de teste gratuito. ${remainingDays === 0 ? '' : remainingDays} ${dayLabel}!`, // Renderiza a mensagem ajustada
+    message: `Você está no período de teste gratuito. ${
+      remainingDays > 0 ? `${remainingDays} ` : ''
+    }${dayLabel}!`, // Renderiza a mensagem ajustada
     planId: 'TRIAL',
   };
 }

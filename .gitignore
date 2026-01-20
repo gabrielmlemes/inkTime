@@ -42,3 +42,8 @@ yarn-error.log*
 next-env.d.ts
 
 /generated/prisma
+
+# Gemini Generated Files
+developer_log.md
+post_linkedin.txt
+SONAR_GUIDE.md

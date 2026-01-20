@@ -1,4 +1,4 @@
-import type { User as PrismaUser } from '@prisma/client';
+import type { Subscription, User as PrismaUser } from '@prisma/client';
 import { DefaultSession } from 'next-auth';
 
 // O "module augmentation" é usado para estender os tipos existentes do next-auth
@@ -31,5 +31,6 @@ declare module 'next-auth' {
     createdAt: string;
     updatedAt: string;
     slug: PrismaUser['slug'];
+    subscription: Subscription | null;
   }
 }

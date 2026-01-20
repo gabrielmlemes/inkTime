@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 2. Configura Node.js igual ao que você usa no projeto (v22)
+      # 2. Configura Node.js igual ao que é usado no projeto (v22)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -36,7 +36,11 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      # 6. Roda o SonarCloud apenas como scanner de qualidade, sem bloquear o CI
+      # 6. Roda os testes e gera o relatório de cobertura
+      - name: Run Tests & Generate Coverage
+        run: npm test
+
+      # 7. Roda o SonarCloud apenas como scanner de qualidade, sem bloquear o CI
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:
