@@ -1,7 +1,7 @@
 'use client';
 import { motion, MotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const HeroParallax = ({
   products,
@@ -21,6 +21,17 @@ export const HeroParallax = ({
     offset: ['start start', 'end start'],
   });
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const springConfig = { stiffness: 300, damping: 30, bounce: 100 };
 
   const translateX = useSpring(useTransform(scrollYProgress, [0, 1], [0, 1000]), springConfig);
@@ -31,7 +42,13 @@ export const HeroParallax = ({
   const rotateX = useSpring(useTransform(scrollYProgress, [0, 0.2], [15, 0]), springConfig);
   const opacity = useSpring(useTransform(scrollYProgress, [0, 0.2], [0.2, 1]), springConfig);
   const rotateZ = useSpring(useTransform(scrollYProgress, [0, 0.2], [20, 0]), springConfig);
-  const translateY = useSpring(useTransform(scrollYProgress, [0, 0.2], [-700, 500]), springConfig);
+
+  const initialTranslateY = isMobile ? -50 : -700;
+  const translateY = useSpring(
+    useTransform(scrollYProgress, [0, 0.2], [initialTranslateY, 500]),
+    springConfig
+  );
+
   return (
     <div
       ref={ref}
@@ -47,12 +64,12 @@ export const HeroParallax = ({
         }}
         className=""
       >
-        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
+        <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-10">
           {firstRow.map((product) => (
             <ProductCard product={product} translate={translateX} key={product.index} />
           ))}
         </motion.div>
-        <motion.div className="flex flex-row  mb-20 space-x-20 ">
+        <motion.div className="flex flex-row  mb-10 space-x-20 ">
           {secondRow.map((product) => (
             <ProductCard product={product} translate={translateXReverse} key={product.index} />
           ))}
@@ -84,12 +101,12 @@ export const Header = () => {
   };
   return (
     <motion.div
-      className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0"
+      className="max-w-7xl relative mx-auto py-10 md:py-40 px-4 w-full left-0 top-0"
       variants={containerVariants}
       initial="hidden"
       animate="show"
     >
-      <motion.h1 variants={itemVariants} className="text-2xl md:text-7xl font-bold text-primary">
+      <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold text-primary">
         Inkore
       </motion.h1>
       <motion.p
@@ -123,7 +140,7 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.index}
-      className="group/product h-96 aspect-video relative shrink-0 overflow-hidden  rounded-2xl "
+      className="group/product h-52 md:h-96 aspect-video relative shrink-0 overflow-hidden  rounded-2xl "
     >
       <Image
         src={product.thumbnail}

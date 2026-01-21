@@ -71,7 +71,7 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
     >
       <section className="mx-auto">
         <Card>
-          <CardHeader className="flex items-center">
+          <CardHeader className="flex flex-wrap items-center justify-between">
             <CardTitle className="text-xl font-semibold uppercase tracking-wider leading-8 text-foreground">
               Serviços
             </CardTitle>
@@ -126,7 +126,7 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
           </CardHeader>
 
           <CardContent>
-            <section className="mt-6">
+            <section>
               {services.length === 0 ? (
                 <p className="text-sm text-muted-foreground">Nenhum serviço cadastrado.</p>
               ) : (
@@ -134,39 +134,44 @@ export function ServicesList({ services, permissions }: ServicesListProps) {
                   {serviceList.map((service) => (
                     <div
                       key={service.id}
-                      className="flex items-center justify-between gap-2 border-b pb-3"
+                      className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b pb-3"
                     >
-                      <div className="flex gap-2 items-center">
-                        <p className="font-semibold text-md">{service.name}</p>
-                        <span className="text-gray-500">•</span>
-                        <h4 className="text-sm ">{formatCurrency(service.price)}</h4>
-
-                        <span className="text-sm ">
-                          {service.duration ? (
-                            <div className="flex items-center gap-2">
-                              <span className="text-gray-500">•</span>
-                              <div className="flex items-center gap-1">
-                                <h5>{Math.floor(service.duration / 60)}h</h5>
-                                <h5 className="text-sm"> {service.duration % 60}min</h5>
-                              </div>
-                            </div>
-                          ) : (
-                            ''
-                          )}
-                        </span>
+                      <div className="flex flex-col gap-1 text-sm text-muted-foreground flex-grow">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-foreground">{service.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span>Preço:</span>
+                          <span className="font-medium text-foreground">
+                            {formatCurrency(service.price)}
+                          </span>
+                        </div>
+                        {service.duration && (
+                          <div className="flex items-center gap-2">
+                            <span>Duração:</span>
+                            <span className="font-medium text-foreground">
+                              {Math.floor(service.duration / 60)}h {service.duration % 60}min
+                            </span>
+                          </div>
+                        )}
                       </div>
 
-                      <div className="flex gap-2">
-                        <Button variant="outline" onClick={() => handleEditService(service)}>
-                          Editar
-                          <PencilIcon className="size-4" />
+                      <div className="flex flex-wrap gap-2 mt-2 sm:mt-0 flex-shrink-0">
+                        <Button
+                          variant="outline"
+                          onClick={() => handleEditService(service)}
+                          className="px-2 sm:px-4"
+                        >
+                          <span className="hidden sm:inline">Editar</span>
+                          <PencilIcon className="size-4 sm:ml-2" />
                         </Button>
                         <Button
                           onClick={() => handleDeleteService({ serviceId: service.id })}
                           variant="destructive"
+                          className="px-2 sm:px-4"
                         >
-                          Excluir
-                          <TrashIcon className="size-4" />
+                          <span className="hidden sm:inline">Excluir</span>
+                          <TrashIcon className="size-4 sm:ml-2" />
                         </Button>
                       </div>
                     </div>

@@ -1,6 +1,7 @@
 import { Banknote, CalendarCheck2, Folder, List, Settings } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Divider } from '@/components/ui/divider';
@@ -22,6 +23,7 @@ export default function MobileDashboardSidebar({
   setIsCollapsed,
 }: MobileDashboardSidebarProps) {
   const { update } = useSession();
+  const [isOpen, setIsOpen] = useState(false);
 
   async function handleSignOut() {
     await signOut();
@@ -31,7 +33,7 @@ export default function MobileDashboardSidebar({
 
   return (
     <div className="md:hidden flex items-center justify-between border-b border-gray-800 px-4 md:px-6 h-14 z-10 sticky top-0 backdrop-blur-sm bg-background/75">
-      <Sheet>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex items-center gap-4">
           <SheetTrigger asChild>
             <Button
@@ -61,6 +63,7 @@ export default function MobileDashboardSidebar({
               icon={<CalendarCheck2 className="w-6 h-6" />}
               pathname={pathname}
               isCollapsed={isCollapsed}
+              setIsOpen={setIsOpen}
             />
 
             <SidebarLink
@@ -69,6 +72,7 @@ export default function MobileDashboardSidebar({
               icon={<Folder className="w-6 h-6" />}
               pathname={pathname}
               isCollapsed={isCollapsed}
+              setIsOpen={setIsOpen}
             />
 
             <span className="text-muted-foreground text-xs mt-4">CONFIGURAÇÕES</span>
@@ -79,6 +83,7 @@ export default function MobileDashboardSidebar({
               icon={<Settings className="w-6 h-6" />}
               pathname={pathname}
               isCollapsed={isCollapsed}
+              setIsOpen={setIsOpen}
             />
 
             <SidebarLink
@@ -87,6 +92,7 @@ export default function MobileDashboardSidebar({
               icon={<Banknote className="w-6 h-6" />}
               pathname={pathname}
               isCollapsed={isCollapsed}
+              setIsOpen={setIsOpen}
             />
           </nav>
 

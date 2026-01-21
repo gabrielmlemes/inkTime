@@ -6,12 +6,13 @@ interface SidebarLinkProps {
   icon?: React.ReactNode;
   pathname: string;
   isCollapsed: boolean;
+  setIsOpen?: (isOpen: boolean) => void;
 }
 import clsx from 'clsx';
 
-const SidebarLink = ({ href, label, icon, pathname, isCollapsed }: SidebarLinkProps) => {
+const SidebarLink = ({ href, label, icon, pathname, isCollapsed, setIsOpen }: SidebarLinkProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} onClick={() => setIsOpen && setIsOpen(false)}>
       <div
         className={clsx(
           'flex items-center gap-2.5 px-3 py-2 rounded-md text-white transition-colors cursor-pointer',
