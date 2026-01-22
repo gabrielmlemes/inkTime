@@ -1,7 +1,10 @@
 'use client';
 import { motion, MotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+
+import { Button } from './button';
 
 export const HeroParallax = ({
   products,
@@ -101,7 +104,7 @@ export const Header = () => {
   };
   return (
     <motion.div
-      className="max-w-7xl relative mx-auto py-10 md:py-40 px-4 w-full left-0 top-0"
+      className="max-w-7xl relative mx-auto py-15 md:py-25 px-6 w-full left-0 top-0"
       variants={containerVariants}
       initial="hidden"
       animate="show"
@@ -116,6 +119,11 @@ export const Header = () => {
         A plataforma completa para estúdios de tatuagem. Gerencie sua agenda, clientes e horários em
         um só lugar, de forma simples e profissional.
       </motion.p>
+      <motion.div variants={itemVariants} className="mt-8 w-fit absolute z-10">
+        <Button asChild size="lg">
+          <Link href="/login">Começar agora</Link>
+        </Button>
+      </motion.div>
     </motion.div>
   );
 };
