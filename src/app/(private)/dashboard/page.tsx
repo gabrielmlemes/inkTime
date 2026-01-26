@@ -37,7 +37,7 @@ const Dashboard = async () => {
       {subscription?.subscriptionStatus !== 'EXPIRED' && (
         <div className="flex justify-end gap-4 mt-4">
           <Link target="_blank" href={`/estudio/${session.user.slug || ''}`}>
-            <Button>
+            <Button className="font-semibold">
               <Calendar size="5" />
               <span>Novo agendamento</span>
             </Button>

@@ -7,7 +7,7 @@ interface TrialLabelProps {
 export function TrialLabel({ subscription }: TrialLabelProps) {
   return (
     <div className="my-2">
-      <h3 className="font-semibold text-lg text-muted-foreground">{subscription.message}</h3>
+      <p className="font-semibold text-lg text-muted-foreground">{subscription.message}</p>
     </div>
   );
 }

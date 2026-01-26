@@ -1,4 +1,5 @@
 import { UserRoundCheck } from 'lucide-react';
+import Link from 'next/link';
 
 import { getStudioTimes } from '@/app/(private)/dashboard/_actions/getStudioTimes';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,7 +13,7 @@ export async function Appointments({ userId }: Readonly<{ userId: string }>) {
 
   return (
     <Card>
-      <CardHeader className="flex flex-col lg:flex-row items-center justify-between">
+      <CardHeader className="flex flex-col gap-3 lg:flex-row items-center justify-between flex-wrap">
         <CardTitle className="text-xl lg:text-2xl flex items-center gap-2">
           <UserRoundCheck />
           Agendamentos
@@ -24,9 +25,14 @@ export async function Appointments({ userId }: Readonly<{ userId: string }>) {
       <CardContent>
         <ScrollArea className="h-96 overflow-y-auto">
           {!studioTimes?.times || studioTimes.times.length === 0 ? (
-            <p className="text-muted-foreground text-sm">
-              Você não adicionou nenhum horário ainda!
-            </p>
+            <div className="flex flex-col items-start justify-start gap-2">
+              <p className="text-muted-foreground text-sm">
+                Você não adicionou nenhum horário ainda!
+              </p>
+              <Link href="/dashboard/perfil" className="text-primary">
+                Clique aqui para configurar seu perfil
+              </Link>
+            </div>
           ) : (
             <AppointmentsList times={studioTimes.times} />
           )}

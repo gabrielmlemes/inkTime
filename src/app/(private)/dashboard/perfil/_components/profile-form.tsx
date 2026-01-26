@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -227,6 +228,10 @@ const ProfileForm = ({ user }: ProfileFormProps) => {
                       <p className="text-sm text-muted text-center italic">
                         Os horários não selecionados serão desconsiderados para agendamentos.
                       </p>
+
+                      <DialogClose asChild>
+                        <Button type="button">Confirmar horários</Button>
+                      </DialogClose>
                     </DialogContent>
                   </Dialog>
                 </div>
