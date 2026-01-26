@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Footer from '@/components/footer';
 
 import Header from './_components/header/header';
+import DashboardMockupSection from './_components/landing/DashboardMockupSection';
 import { FAQSection } from './_components/landing/FAQSection';
 import { FeaturesSection } from './_components/landing/FeaturesSection';
 import { FinalCTASection } from './_components/landing/FinalCTASection';
@@ -25,6 +26,9 @@ export default function Home() {
         {/* <SocialProofSection /> */}
         <div id="recursos">
           <FeaturesSection />
+        </div>
+        <div id="demonstracao">
+          <DashboardMockupSection />
         </div>
         <HowItWorksSection />
         <div id="precos">

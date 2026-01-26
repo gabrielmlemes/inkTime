@@ -16,9 +16,9 @@ const PrivacyPolicyPage = () => {
           </p>
 
           <p>
-            Bem-vindo à Inkore! Nnós Estamos comprometidos em proteger sua privacidade. Esta
-            Política de Privacidade explica como coletamos, usamos, divulgamos e protegemos suas
-            informações quando você usa nosso software como serviço (SaaS).
+            Bem-vindo à Inkore! Nós Estamos comprometidos em proteger sua privacidade. Esta Política
+            de Privacidade explica como coletamos, usamos, divulgamos e protegemos suas informações
+            quando você usa nosso software como serviço (SaaS).
           </p>
 
           <section className="space-y-2">
@@ -120,7 +120,7 @@ const PrivacyPolicyPage = () => {
             <h2 className="text-2xl font-semibold text-foreground">7. Contate-Nos</h2>
             <p>
               Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato
-              conosco em: contato@inkore.com.br.
+              conosco em: inkorestudioo@gmail.com.
             </p>
           </section>
         </div>

@@ -50,10 +50,10 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="mailto:contato@inkore.com.br"
+                  href="mailto:inkorestudioo@gmail.com"
                   className="hover:text-primary transition-colors"
                 >
-                  contato@inkore.com.br
+                  inkorestudioo@gmail.com
                 </Link>
               </li>
             </ul>
@@ -67,18 +67,6 @@ const Footer = () => {
             <p className="text-sm text-center md:text-left">
               &copy; {new Date().getFullYear()} Inkore. Todos os direitos reservados.
             </p>
-
-            <div className="flex justify-center md:justify-start gap-1 italic text-xs">
-              <p className="text-center">Desenvolvido por</p>
-              <Link
-                href="https://gabrielmlemes.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-              >
-                @Gabriel Lemes
-              </Link>
-            </div>
           </div>
         </div>
       </div>

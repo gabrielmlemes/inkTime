@@ -94,7 +94,7 @@ const TermsOfServicePage = () => {
             <h2 className="text-2xl font-semibold text-foreground">8. Contate-Nos</h2>
             <p>
               Se você tiver alguma dúvida sobre estes Termos, entre em contato conosco em:
-              contato@inkore.com.br.
+              inkorestudioo@gmail.com.
             </p>
           </section>
         </div>
