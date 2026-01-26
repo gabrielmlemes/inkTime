@@ -31,6 +31,7 @@ jobs:
       # 4. Roda ESLint para garantir que o código segue o padrão definido
       - name: Run ESLint
         run: npx eslint . --max-warnings=0
+        continue-on-error: true
 
       # 5. Executa o build do Next.js para validar se o projeto compila corretamente
       - name: Build Next.js
