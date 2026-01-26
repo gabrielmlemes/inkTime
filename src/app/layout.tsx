@@ -1,5 +1,6 @@
 import './globals.css';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Toaster } from 'sonner';
@@ -87,6 +88,7 @@ export default function RootLayout({
           <QueryClientContext>
             <Toaster />
             {children}
+            <SpeedInsights />
           </QueryClientContext>
         </SessionAuthProvider>
       </body>
