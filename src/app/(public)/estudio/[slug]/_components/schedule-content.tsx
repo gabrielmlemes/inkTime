@@ -26,7 +26,7 @@ export default async function ScheduleContent({ user }: { user: ScheduleContentP
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="h-32 bg-primary" />
+      <div className="h-32 bg-secondary border-b border-gray-500 shadow-2xl shadow-gray-500" />
 
       <section className="container mx-auto px-3">
         <div className="max-w-2xl mx-auto">
@@ -73,6 +73,10 @@ export default async function ScheduleContent({ user }: { user: ScheduleContentP
                     </div>
                   )}
                 </div>
+
+                <p className="text-lg text-center mt-8 font-semibold mb-2">
+                  Preencha o formulário abaixo para agendar um horário
+                </p>
 
                 <ScheduleForm user={user} />
               </>

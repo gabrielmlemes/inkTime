@@ -141,7 +141,7 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
   }, [fetchBlockedTimes, user.id, selectedDate, selectedTime, user.times]);
 
   return (
-    <section className="my-8 px-4 container">
+    <section className="mb-8 px-4 container">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleRegisterAppointment)}>
           <div className="space-y-6 border border-gray-600 shadow-lg shadow-gray-700 p-6 rounded-lg">
@@ -150,7 +150,7 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome Completo</FormLabel>
+                  <FormLabel>Nome Completo:</FormLabel>
                   <FormControl>
                     <Input id="name" {...field} placeholder="Digite seu nome completo..." />
                   </FormControl>
@@ -163,7 +163,7 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>E-mail</FormLabel>
+                  <FormLabel>E-mail:</FormLabel>
                   <FormControl>
                     <Input id="email" {...field} placeholder="Digite seu e-mail..." />
                   </FormControl>
@@ -176,7 +176,7 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Telefone (WhatsApp)</FormLabel>
+                  <FormLabel>Telefone (WhatsApp):</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -197,8 +197,8 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
               name="date"
               control={form.control}
               render={({ field }) => (
-                <FormItem className="flex items-center gap-2">
-                  <FormLabel>Data do agendamento</FormLabel>
+                <FormItem className="flex flex-col">
+                  <FormLabel>Data do agendamento:</FormLabel>
                   <FormControl>
                     <DateTimePicker
                       key={datePickerKey}
@@ -220,7 +220,7 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
               control={form.control}
               render={({ field }) => (
                 <FormItem className="flex flex-col  gap-2">
-                  <FormLabel>Selecione o serviço</FormLabel>
+                  <FormLabel>Selecione o serviço:</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={(value) => {
@@ -234,14 +234,20 @@ export function ScheduleForm({ user }: { user: ScheduleContentProps }) {
                       </SelectTrigger>
 
                       <SelectContent>
-                        <SelectGroup>
-                          {user.services.map((service) => (
-                            <SelectItem key={service.id} value={service.id}>
-                              {service.name} - ({Math.floor(service.duration / 60)}h{' '}
-                              {service.duration % 60}min) - R$ {service.price / 100}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
+                        {user.services.length === 0 ? (
+                          <p className="text-sm text-muted-foreground p-2">
+                            Nenhum serviço cadastrado pelo estúdio
+                          </p>
+                        ) : (
+                          <SelectGroup>
+                            {user.services.map((service) => (
+                              <SelectItem key={service.id} value={service.id}>
+                                {service.name} - ({Math.floor(service.duration / 60)}h{' '}
+                                {service.duration % 60}min) - R$ {service.price / 100}
+                              </SelectItem>
+                            ))}
+                          </SelectGroup>
+                        )}
                       </SelectContent>
                     </Select>
                   </FormControl>

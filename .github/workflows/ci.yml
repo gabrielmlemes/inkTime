@@ -33,13 +33,14 @@ jobs:
         run: npx eslint . --max-warnings=0
         continue-on-error: true
 
-      # 5. Executa o build do Next.js para validar se o projeto compila corretamente
+      # 5. Roda os testes e gera o relatório de cobertura
+      - name: Run Tests & Generate Coverage
+        run: npm test
+
+      # 6. Executa o build do Next.js para validar se o projeto compila corretamente
       - name: Build Next.js
         run: npm run build
 
-      # 6. Roda os testes e gera o relatório de cobertura
-      - name: Run Tests & Generate Coverage
-        run: npm test
 
       # 7. Roda o SonarCloud apenas como scanner de qualidade, sem bloquear o CI
       - name: SonarCloud Scan

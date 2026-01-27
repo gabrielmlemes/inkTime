@@ -40,63 +40,10 @@ Este projeto foi construído utilizando um conjunto de tecnologias modernas e es
 -   **Estilização:** [Tailwind CSS](https://tailwindcss.com/)
 -   **Componentes UI:** Componentes customizados inspirados no Shadcn/ui, utilizando Radix UI e Tailwind CSS
 -   **Validação de Formulários:** [Zod](https://zod.dev/) & [React Hook Form](https://react-hook-form.com/)
+-   **Hospedagem de imagens:** [Cloudinary](https://cloudinary.com/)
 
 ---
 
-## ⚙️ Começando: Configuração Local
-
-Siga os passos abaixo para configurar e rodar o projeto em seu ambiente de desenvolvimento local.
-
-### Pré-requisitos
-
--   [Node.js](https://nodejs.org/) (versão 20.x ou superior)
--   [npm](https://www.npmjs.com/) ou um gerenciador de pacotes compatível
-
-### Instalação
-
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/seu-usuario/seu-repo.git
-    cd seu-repo
-    ```
-
-2.  **Instale as dependências:**
-    ```bash
-    npm install
-    ```
-
-3.  **Configure as Variáveis de Ambiente:**
-    -   Renomeie o arquivo `.env.sample` para `.env.local`.
-    -   Preencha todas as variáveis de ambiente necessárias. Elas incluem:
-        ```env
-        # Banco de Dados (PostgreSQL)
-        DATABASE_URL="..."
-
-        # Autenticação (NextAuth.js)
-        AUTH_SECRET="..."
-        AUTH_GOOGLE_ID="..."
-        AUTH_GOOGLE_SECRET="..."
-        
-        # Pagamentos (Stripe)
-        STRIPE_API_KEY="..."
-        STRIPE_WEBHOOK_SECRET_KEY="..."
-        NEXT_PUBLIC_STRIPE_PUBLIC_KEY="..."
-        ```
-
-4.  **Aplique as Migrações do Banco de Dados:**
-    Este comando irá garantir que o schema do seu banco de dados esteja em sincronia com o Prisma.
-    ```bash
-    npx prisma migrate dev
-    ```
-
-5.  **Rode o Servidor de Desenvolvimento:**
-    ```bash
-    npm run dev
-    ```
-
-6.  Abra [http://localhost:3000](http://localhost:3000) em seu navegador para ver a aplicação funcionando.
-
----
 
 ## 📜 Licença
 
